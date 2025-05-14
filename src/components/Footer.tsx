@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <h2 className="text-2xl font-bold mb-2">Rushikesh</h2>
+            <h2 className="text-2xl font-bold mb-2">Rohit Sandip Birdawade</h2>
             <p className="text-gray-300">Aspiring AI & ML Engineer</p>
           </div>
           
@@ -23,7 +23,7 @@ const Footer = () => {
               <Github size={18} />
             </a>
             <a 
-              href="https://linkedin.com/" 
+              href="https://www.linkedin.com/in/rohit-birdawade-0b4865238/" 
               target="_blank" 
               rel="noreferrer"
               className="bg-[#0077B5] hover:bg-[#0077B5]/90 text-white p-2 rounded-full transition-colors"
@@ -31,7 +31,7 @@ const Footer = () => {
               <Linkedin size={18} />
             </a>
             <a 
-              href="mailto:contact@rushikesh.com" 
+              href="mailto:Rohitbirdawade2875@gmail.com" 
               className="bg-gray-600 hover:bg-gray-500 text-white p-2 rounded-full transition-colors"
             >
               <Mail size={18} />
@@ -43,7 +43,7 @@ const Footer = () => {
         
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            &copy; {currentYear} Rushikesh. All rights reserved.
+            &copy; {currentYear} Rohit Sandip Birdawade. All rights reserved.
           </p>
           
           <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-gray-400">

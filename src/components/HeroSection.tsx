@@ -23,7 +23,7 @@ const HeroSection = () => {
         <div className="max-w-3xl">
           <div className="animate-fadeUp">
             <p className="text-primary font-medium mb-2">Hello, my name is</p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Rushikesh.</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Rohit Sandip Birdawade.</h1>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700 mb-6">
               I build with <span className="text-gradient">AI & ML</span>
             </h2>
@@ -31,7 +31,7 @@ const HeroSection = () => {
           
           <div className="animate-fadeUp animate-delay-200">
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              I'm an aspiring AI & ML engineer with a background in Computer Science Engineering. 
+              I'm an aspiring AI & ML engineer with a background in Computer Science Engineering from Baramati, Pune. 
               Passionate about creating intelligent solutions that solve real-world problems.
             </p>
           </div>

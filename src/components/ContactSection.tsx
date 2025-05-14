@@ -101,7 +101,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium">Email</h4>
-                  <p className="text-gray-600">contact@rushikesh.com</p>
+                  <p className="text-gray-600">Rohitbirdawade2875@gmail.com</p>
                 </div>
               </div>
               
@@ -111,7 +111,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium">Location</h4>
-                  <p className="text-gray-600">Pune, Maharashtra, India</p>
+                  <p className="text-gray-600">Baramati, Pune, Maharashtra, India</p>
                 </div>
               </div>
               
@@ -121,7 +121,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <h4 className="font-medium">Phone</h4>
-                  <p className="text-gray-600">+91 98765 43210</p>
+                  <p className="text-gray-600">+91 7038119511</p>
                 </div>
               </div>
             </div>
@@ -138,7 +138,7 @@ const ContactSection = () => {
                   <Github size={20} />
                 </a>
                 <a 
-                  href="https://linkedin.com/" 
+                  href="https://www.linkedin.com/in/rohit-birdawade-0b4865238/" 
                   target="_blank" 
                   rel="noreferrer"
                   className="bg-[#0077B5] text-white p-3 rounded-full hover:bg-[#0077B5]/90 transition-colors"

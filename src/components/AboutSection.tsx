@@ -18,7 +18,7 @@ const AboutSection = () => {
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex flex-col justify-end p-4">
-                <h3 className="text-white text-xl font-bold">Rushikesh</h3>
+                <h3 className="text-white text-xl font-bold">Rohit Sandip Birdawade</h3>
                 <p className="text-white/90 text-sm">Aspiring AI & ML Engineer</p>
               </div>
             </div>
@@ -87,7 +87,7 @@ const AboutSection = () => {
               <Button 
                 variant="outline" 
                 className="border-primary text-primary hover:bg-primary/5"
-                onClick={() => window.open("https://www.linkedin.com/", "_blank")}
+                onClick={() => window.open("https://www.linkedin.com/in/rohit-birdawade-0b4865238/", "_blank")}
               >
                 LinkedIn Profile
               </Button>
