@@ -9,12 +9,12 @@ const AboutSection = () => {
         <h2 className="section-heading mx-auto text-center mb-12">About Me</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          {/* Image Column */}
+          {/* Image Column - Updated with actual photo */}
           <div className="lg:col-span-2 flex justify-center order-2 lg:order-1">
             <div className="relative rounded-lg overflow-hidden shadow-xl max-w-sm w-full">
               <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=400&h=500" 
-                alt="Profile" 
+                src="/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png"
+                alt="Rohit Sandip Birdawade" 
                 className="w-full h-auto object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex flex-col justify-end p-4">

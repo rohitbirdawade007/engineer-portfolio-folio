@@ -45,6 +45,8 @@ const Navbar = () => {
     }
   };
 
+  const navItems = ["home", "about", "projects", "achievements", "experience", "skills", "contact"];
+
   return (
     <header
       className={cn(
@@ -53,11 +55,11 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#" className="text-xl md:text-2xl font-bold text-gradient">Rushikesh.</a>
+        <a href="#" className="text-xl md:text-2xl font-bold text-gradient">Rohit.</a>
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {["home", "about", "projects", "skills", "contact"].map((section) => (
+        <nav className="hidden md:flex items-center space-x-6">
+          {navItems.map((section) => (
             <button
               key={section}
               onClick={() => scrollToSection(section)}
@@ -104,7 +106,7 @@ const Navbar = () => {
         mobileMenuOpen ? "max-h-screen py-4" : "max-h-0"
       )}>
         <div className="container mx-auto px-4 flex flex-col space-y-4">
-          {["home", "about", "projects", "skills", "contact"].map((section) => (
+          {navItems.map((section) => (
             <button
               key={section}
               onClick={() => scrollToSection(section)}
