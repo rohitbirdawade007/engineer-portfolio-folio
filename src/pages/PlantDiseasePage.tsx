@@ -92,7 +92,7 @@ const PlantDiseasePage = () => {
         <div className="bg-card rounded-lg p-6 shadow-sm border border-border">
           <div className="mb-8">
             <img 
-              src="/placeholder.svg" 
+              src="/lovable-uploads/b0553c44-91c8-4afd-ab90-bcf2be286fa9.png" 
               alt="Classification Report" 
               className="mx-auto max-w-full h-auto rounded-md border border-border"
               style={{ maxHeight: "500px" }}
