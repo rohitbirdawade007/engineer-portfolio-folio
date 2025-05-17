@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -49,15 +48,6 @@ const projects: Project[] = [
     technologies: ["Python", "Machine Learning", "Data Analysis"],
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
     demoLink: "https://www.kaggle.com/",
-    githubLink: "https://github.com/"
-  },
-  {
-    id: 5,
-    title: "Deep Learning for Image Classification",
-    description: "Implementation of advanced deep learning models for image classification and analysis using convolutional neural networks and hybrid architectures.",
-    technologies: ["TensorFlow", "CNN", "CNN-SVM Hybrid", "Densenet201"],
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=800",
-    demoLink: "https://colab.research.google.com/",
     githubLink: "https://github.com/"
   }
 ];
