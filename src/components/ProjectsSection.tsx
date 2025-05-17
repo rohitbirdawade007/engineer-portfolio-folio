@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ExternalLink, Github } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface Project {
   id: number;
@@ -12,11 +13,21 @@ interface Project {
   image: string;
   demoLink?: string;
   githubLink?: string;
+  internalLink?: string;
 }
 
 const projects: Project[] = [
   {
     id: 1,
+    title: "Plant Disease Classification using DenseNet",
+    description: "A deep learning model trained using DenseNet201 to classify plant diseases from leaf images. Achieved 94% accuracy across 10 classes.",
+    technologies: ["Deep Learning", "Keras", "Image Classification", "DenseNet"],
+    image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?auto=format&fit=crop&q=80&w=800",
+    githubLink: "https://github.com/",
+    internalLink: "/projects/plant-disease"
+  },
+  {
+    id: 2,
     title: "Smart Electronic Voting Machines (SEVM)",
     description: "Advanced electronic voting system using Raspberry Pi that enhances security, transparency, and usability by integrating digital technology and the VVPAT process.",
     technologies: ["Raspberry Pi", "Python", "Computer Vision"],
@@ -24,7 +35,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/"
   },
   {
-    id: 2,
+    id: 3,
     title: "Smart Washroom for Senior Citizens",
     description: "Revolutionary Smart Washroom incorporating advanced technologies to enhance convenience, safety, and autonomy for senior citizens and hospital patients with a hands-free experience.",
     technologies: ["Arduino", "IoT", "Sensors"],
@@ -32,7 +43,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/"
   },
   {
-    id: 3,
+    id: 4,
     title: "Customer Segmentation Analysis",
     description: "Data analytics project focused on customer segmentation using machine learning models, data cleaning, and visualization techniques to extract actionable business insights.",
     technologies: ["Python", "Machine Learning", "Data Analysis"],
@@ -41,7 +52,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/"
   },
   {
-    id: 4,
+    id: 5,
     title: "Deep Learning for Image Classification",
     description: "Implementation of advanced deep learning models for image classification and analysis using convolutional neural networks and hybrid architectures.",
     technologies: ["TensorFlow", "CNN", "CNN-SVM Hybrid", "Densenet201"],
@@ -107,6 +118,19 @@ const ProjectsSection = () => {
                   >
                     <ExternalLink size={16} />
                     Live Demo
+                  </Button>
+                )}
+                {project.internalLink && (
+                  <Button
+                    variant="default"
+                    size="sm"
+                    className="flex items-center gap-2 bg-primary"
+                    asChild
+                  >
+                    <Link to={project.internalLink}>
+                      <ExternalLink size={16} />
+                      Live Demo
+                    </Link>
                   </Button>
                 )}
               </CardFooter>
