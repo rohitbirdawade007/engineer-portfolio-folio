@@ -1,7 +1,8 @@
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, FileChartLine } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface Project {
@@ -49,6 +50,16 @@ const projects: Project[] = [
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=800",
     demoLink: "https://www.kaggle.com/",
     githubLink: "https://github.com/"
+  },
+  {
+    id: 5,
+    title: "🧿 Diabetic Retinopathy Detection Using Deep Learning",
+    description: "A CNN model that classifies retinal fundus images into Diabetic Retinopathy, Cataract, Glaucoma, or Normal with 88% accuracy and 99% precision for Diabetic Retinopathy, helping with early diagnosis in ophthalmology.",
+    technologies: ["TensorFlow", "Keras", "CNN", "Python", "Matplotlib"],
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800",
+    demoLink: "https://colab.research.google.com/",
+    githubLink: "https://github.com/",
+    internalLink: "/projects/retinopathy"
   }
 ];
 
@@ -118,8 +129,8 @@ const ProjectsSection = () => {
                     asChild
                   >
                     <Link to={project.internalLink}>
-                      <ExternalLink size={16} />
-                      Live Demo
+                      <FileChartLine size={16} />
+                      View Project
                     </Link>
                   </Button>
                 )}
