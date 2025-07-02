@@ -19,6 +19,15 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
+    title: "🌾 AI and IoT Integration in Sustainable Agriculture",
+    description: "Smart farming system integrating hydroponics, aquaponics, and poultry with IoT sensors and AI-driven resource optimization. Features real-time monitoring, automated control systems, and improved crop yield through intelligent decision-making.",
+    technologies: ["IoT", "ESP32", "Raspberry Pi", "AI/ML", "Sensors", "Automation"],
+    image: "/lovable-uploads/edf21421-bc8a-46d3-9dd5-c6c00cdb3cdd.png",
+    githubLink: "https://github.com/",
+    internalLink: "/projects/smart-agriculture"
+  },
+  {
+    id: 2,
     title: "Plant Disease Classification using DenseNet",
     description: "A deep learning model trained using DenseNet201 to classify plant diseases from leaf images. Achieved 94% accuracy across 10 classes.",
     technologies: ["Deep Learning", "Keras", "Image Classification", "DenseNet"],
@@ -27,7 +36,7 @@ const projects: Project[] = [
     internalLink: "/projects/plant-disease"
   },
   {
-    id: 2,
+    id: 3,
     title: "Smart Electronic Voting Machines (SEVM)",
     description: "Advanced electronic voting system using Raspberry Pi that enhances security, transparency, and usability by integrating digital technology and the VVPAT process.",
     technologies: ["Raspberry Pi", "Python", "Computer Vision"],
@@ -35,7 +44,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/"
   },
   {
-    id: 3,
+    id: 4,
     title: "Smart Washroom for Senior Citizens",
     description: "Revolutionary Smart Washroom incorporating advanced technologies to enhance convenience, safety, and autonomy for senior citizens and hospital patients with a hands-free experience.",
     technologies: ["Arduino", "IoT", "Sensors"],
@@ -43,7 +52,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/"
   },
   {
-    id: 4,
+    id: 5,
     title: "Customer Segmentation Analysis",
     description: "Data analytics project focused on customer segmentation using machine learning models, data cleaning, and visualization techniques to extract actionable business insights.",
     technologies: ["Python", "Machine Learning", "Data Analysis"],
@@ -52,7 +61,7 @@ const projects: Project[] = [
     githubLink: "https://github.com/"
   },
   {
-    id: 5,
+    id: 6,
     title: "🧿 Diabetic Retinopathy Detection Using Deep Learning",
     description: "A CNN model that classifies retinal fundus images into Diabetic Retinopathy, Cataract, Glaucoma, or Normal with 88% accuracy and 99% precision for Diabetic Retinopathy, helping with early diagnosis in ophthalmology.",
     technologies: ["TensorFlow", "Keras", "CNN", "Python", "Matplotlib"],

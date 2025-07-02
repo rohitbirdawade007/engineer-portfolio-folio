@@ -79,10 +79,8 @@ const ContactSection = () => {
             <iframe 
               src="https://forms.gle/vbKsWorfq6myR4EN7"  
               width="100%" 
-              height="900" 
-              frameBorder="0" 
-              marginHeight="0" 
-              marginWidth="0"
+              height={900}
+              style={{ border: 0 }}
               className="rounded-md"
             >
               Loading…
