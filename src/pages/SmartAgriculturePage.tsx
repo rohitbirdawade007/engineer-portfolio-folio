@@ -1,5 +1,4 @@
-
-import { ArrowLeft, Thermometer, Droplet, Sun, Zap, Cpu, Wifi, TrendingUp, Leaf, Fish, Egg } from "lucide-react";
+import { ArrowLeft, Thermometer, Droplet, Sun, Zap, Cpu, Wifi, TrendingUp, Leaf, Fish, Egg, Github } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
