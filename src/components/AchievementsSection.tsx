@@ -18,6 +18,18 @@ interface Achievement {
 const achievements: Achievement[] = [
   {
     id: 1,
+    title: "Excellence of the Year Award",
+    organization: "Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering",
+    date: "A.Y. 2024-25",
+    type: "award",
+    description: "✨ Grateful & Humbled! ✨ I'm honored to receive the \"Excellence of the Year\" Award 🏆 from Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering for my outstanding contributions to technical and non-technical activities at University, State, and National levels during A.Y. 2024–25. This achievement reflects the support of mentors, peers, and everyone who has been part of this journey. 🚀 Looking forward to creating more impact and taking on greater challenges ahead! 💡",
+    images: [
+      "/lovable-uploads/ce935f5a-f5f3-4a0b-bae5-f403b99e1b88.png",
+      "/lovable-uploads/9e121016-b764-4662-9f3d-7a8d954cd754.png"
+    ]
+  },
+  {
+    id: 2,
     title: "Student of the Computer Department (A.Y. 2024–25)",
     organization: "Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering",
     date: "2024-25",
@@ -29,34 +41,6 @@ const achievements: Achievement[] = [
       "/lovable-uploads/1f4a7524-974e-43ee-a52c-0068c3221a0b.png"
     ],
     hasDetailPage: true
-  },
-  {
-    id: 2,
-    title: "AI model-building workshop",
-    organization: "NEXT WAVE",
-    date: "January 2024",
-    type: "workshop"
-  },
-  {
-    id: 3,
-    title: "HTML & CSS For Web Development",
-    organization: "Skill Academy",
-    date: "2023",
-    type: "certification"
-  },
-  {
-    id: 4,
-    title: "Free Live Course on Mastering Battery Management Systems",
-    organization: "",
-    date: "2023",
-    type: "certification"
-  },
-  {
-    id: 5,
-    title: "Three Days of National Online Workshops on Research Paper Writing & Publishing",
-    organization: "",
-    date: "2022",
-    type: "workshop"
   }
 ];
 
