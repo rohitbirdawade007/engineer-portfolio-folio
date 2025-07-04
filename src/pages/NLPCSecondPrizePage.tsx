@@ -85,7 +85,7 @@ const NLPCSecondPrizePage = () => {
               {teamMembers.map((member, index) => <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                      <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
+                      
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
