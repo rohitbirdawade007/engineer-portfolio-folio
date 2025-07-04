@@ -1,4 +1,3 @@
-
 import { Award, Check, Trophy } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -22,11 +21,12 @@ const achievements: Achievement[] = [
     organization: "Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering",
     date: "A.Y. 2024-25",
     type: "award",
-    description: "✨ Grateful & Humbled! ✨ I'm honored to receive the \"Excellence of the Year\" Award 🏆 from Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering for my outstanding contributions to technical and non-technical activities at University, State, and National levels during A.Y. 2024–25. This achievement reflects the support of mentors, peers, and everyone who has been part of this journey. 🚀 Looking forward to creating more impact and taking on greater challenges ahead! 💡",
+    description: "✨ Grateful & Humbled! ✨ I'm honored to receive the \"Excellence of the Year\" Award 🏆 from Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering for my outstanding contributions to technical and non-technical activities at University, State, and National levels during A.Y. 2024–25. This milestone is a reflection of consistent efforts, innovation, and active involvement across diverse platforms. 🚀 📖 Click to see detailed insights about this achievement.",
     images: [
       "/lovable-uploads/ce935f5a-f5f3-4a0b-bae5-f403b99e1b88.png",
       "/lovable-uploads/9e121016-b764-4662-9f3d-7a8d954cd754.png"
-    ]
+    ],
+    hasDetailPage: true
   },
   {
     id: 2,
@@ -49,7 +49,11 @@ const AchievementsSection = () => {
 
   const handleAwardClick = (achievement: Achievement) => {
     if (achievement.hasDetailPage) {
-      navigate('/awards/student-of-computer-department');
+      if (achievement.id === 1) {
+        navigate('/awards/excellence-of-the-year');
+      } else if (achievement.id === 2) {
+        navigate('/awards/student-of-computer-department');
+      }
     }
   };
 
