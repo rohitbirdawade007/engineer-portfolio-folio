@@ -12,6 +12,7 @@ import SmartAgriculturePage from "./pages/SmartAgriculturePage";
 import StudentAwardPage from "./pages/StudentAwardPage";
 import ExcellenceAwardPage from "./pages/ExcellenceAwardPage";
 import NLPCFirstPrizePage from "./pages/NLPCFirstPrizePage";
+import NLPCSecondPrizePage from "./pages/NLPCSecondPrizePage";
 import CarromFirstRankPage from "./pages/CarromFirstRankPage";
 import NCRISTResearchPaperPage from "./pages/NCRISTResearchPaperPage";
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/awards/student-of-computer-department" element={<StudentAwardPage />} />
           <Route path="/awards/excellence-of-the-year" element={<ExcellenceAwardPage />} />
           <Route path="/achievements/nlpc-first-prize" element={<NLPCFirstPrizePage />} />
+          <Route path="/achievements/nlpc-second-prize" element={<NLPCSecondPrizePage />} />
           <Route path="/achievements/carrom-first-rank" element={<CarromFirstRankPage />} />
           <Route path="/achievements/ncrist-research-paper" element={<NCRISTResearchPaperPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
