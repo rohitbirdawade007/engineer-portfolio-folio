@@ -1,43 +1,32 @@
-
 import { ArrowLeft, Trophy, Calendar, MapPin, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 const NLPCSecondPrizePage = () => {
   const navigate = useNavigate();
-
-  const teamMembers = [
-    {
-      name: "Rohit Birdawade",
-      email: "rohitbirdawade2875@gmail.com",
-      photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
-    },
-    {
-      name: "Shreya Bhosale",
-      email: "shreyabhosale450@gmail.com",
-      photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
-    },
-    {
-      name: "Shivanjali Dhumal",
-      email: "shivanjalidhumal0707@gmail.com",
-      photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
-    },
-    {
-      name: "Deepak Khaladkar",
-      email: "deepakkhaladkar5412@gmail.com",
-      photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
-    },
-    {
-      name: "Eshwar Abhay Gopad",
-      email: "eshwargopad@gmail.com",
-      photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-white">
+  const teamMembers = [{
+    name: "Rohit Birdawade",
+    email: "rohitbirdawade2875@gmail.com",
+    photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
+  }, {
+    name: "Shreya Bhosale",
+    email: "shreyabhosale450@gmail.com",
+    photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
+  }, {
+    name: "Shivanjali Dhumal",
+    email: "shivanjalidhumal0707@gmail.com",
+    photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
+  }, {
+    name: "Deepak Khaladkar",
+    email: "deepakkhaladkar5412@gmail.com",
+    photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
+  }, {
+    name: "Eshwar Abhay Gopad",
+    email: "eshwargopad@gmail.com",
+    photo: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png"
+  }];
+  return <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="pt-20 pb-12">
@@ -93,15 +82,10 @@ const NLPCSecondPrizePage = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {teamMembers.map((member, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
+              {teamMembers.map((member, index) => <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                      <img 
-                        src={member.photo} 
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                      />
+                      <img src={member.photo} alt={member.name} className="w-full h-full object-cover" />
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
@@ -109,8 +93,7 @@ const NLPCSecondPrizePage = () => {
                       <p className="text-orange-600 text-sm font-medium">Team Member</p>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -119,29 +102,17 @@ const NLPCSecondPrizePage = () => {
             <h3 className="text-2xl font-bold mb-6 text-gray-900">Competition Moments</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <img 
-                  src="/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png" 
-                  alt="Team at Sinhgad College of Engineering" 
-                  className="w-full rounded-lg shadow-md" 
-                />
+                <img src="/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png" alt="Team at Sinhgad College of Engineering" className="w-full rounded-lg shadow-md" />
                 <p className="text-center text-gray-600 text-sm">Team at Sinhgad College of Engineering</p>
               </div>
               <div className="space-y-4">
-                <img 
-                  src="/lovable-uploads/336b76fb-a773-44ae-9862-2668262245b7.png" 
-                  alt="Project Demonstration" 
-                  className="w-full rounded-lg shadow-md" 
-                />
+                <img src="/lovable-uploads/336b76fb-a773-44ae-9862-2668262245b7.png" alt="Project Demonstration" className="w-full rounded-lg shadow-md object-fill" />
                 <p className="text-center text-gray-600 text-sm">Project Demonstration</p>
               </div>
             </div>
             
             <div className="mt-6">
-              <img 
-                src="/lovable-uploads/18376493-2dcf-4260-9361-b185bb1f76d6.png" 
-                alt="Official Competition Results" 
-                className="w-full rounded-lg shadow-md" 
-              />
+              <img src="/lovable-uploads/18376493-2dcf-4260-9361-b185bb1f76d6.png" alt="Official Competition Results" className="w-full rounded-lg shadow-md" />
               <p className="text-center text-gray-600 text-sm mt-2">Official Competition Results Document</p>
             </div>
           </div>
@@ -156,8 +127,6 @@ const NLPCSecondPrizePage = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default NLPCSecondPrizePage;
