@@ -106,7 +106,7 @@ const NLPCSecondPrizePage = () => {
                 <p className="text-center text-gray-600 text-sm">Team at Sinhgad College of Engineering</p>
               </div>
               <div className="space-y-4">
-                <img src="/lovable-uploads/336b76fb-a773-44ae-9862-2668262245b7.png" alt="Project Demonstration" className="w-full rounded-lg shadow-md object-fill" />
+                <img src="/lovable-uploads/336b76fb-a773-44ae-9862-2668262245b7.png" alt="Project Demonstration" className="w-full rounded-lg shadow-md object-cover" />
                 <p className="text-center text-gray-600 text-sm">Project Demonstration</p>
               </div>
             </div>
