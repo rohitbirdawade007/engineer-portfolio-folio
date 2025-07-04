@@ -1,47 +1,33 @@
-
 import { ArrowLeft, Trophy, Calendar, MapPin, Award, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
 const NLPCFirstPrizePage = () => {
   const navigate = useNavigate();
-
-  const teamMembers = [
-    {
-      name: "Rohit Birdawade",
-      email: "rohitbirdawade2875@gmail.com",
-      photo: "/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png"
-    },
-    {
-      name: "Shreya Bhosale", 
-      email: "shreyabhosale450@gmail.com",
-      photo: "/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png"
-    },
-    {
-      name: "Shivanjali Dhumal",
-      email: "shivanjalidhumal0707@gmail.com",
-      photo: "/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png"
-    },
-    {
-      name: "Deepak Khaladkar",
-      email: "deepakkhaladkar5412@gmail.com", 
-      photo: "/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-white">
+  const teamMembers = [{
+    name: "Rohit Birdawade",
+    email: "rohitbirdawade2875@gmail.com",
+    photo: "/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png"
+  }, {
+    name: "Shreya Bhosale",
+    email: "shreyabhosale450@gmail.com",
+    photo: "/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png"
+  }, {
+    name: "Shivanjali Dhumal",
+    email: "shivanjalidhumal0707@gmail.com",
+    photo: "/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png"
+  }, {
+    name: "Deepak Khaladkar",
+    email: "deepakkhaladkar5412@gmail.com",
+    photo: "/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png"
+  }];
+  return <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="pt-20 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/')}
-            className="mb-8 hover:bg-gray-100"
-          >
+          <Button variant="ghost" onClick={() => navigate('/')} className="mb-8 hover:bg-gray-100">
             <ArrowLeft size={20} className="mr-2" />
             Back to Portfolio
           </Button>
@@ -92,15 +78,10 @@ const NLPCFirstPrizePage = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {teamMembers.map((member, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
+              {teamMembers.map((member, index) => <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                      <img 
-                        src={member.photo} 
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                      />
+                      
                     </div>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
@@ -108,8 +89,7 @@ const NLPCFirstPrizePage = () => {
                       <p className="text-primary text-sm font-medium">Team Member</p>
                     </div>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
 
@@ -118,29 +98,17 @@ const NLPCFirstPrizePage = () => {
             <h3 className="text-2xl font-bold mb-6 text-gray-900">Competition Moments</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <img 
-                  src="/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png" 
-                  alt="Award Ceremony - Trophy Presentation"
-                  className="w-full rounded-lg shadow-md"
-                />
+                <img src="/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png" alt="Award Ceremony - Trophy Presentation" className="w-full rounded-lg shadow-md" />
                 <p className="text-center text-gray-600 text-sm">Award Ceremony - Trophy Presentation</p>
               </div>
               <div className="space-y-4">
-                <img 
-                  src="/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png" 
-                  alt="Team Photo with Trophy"
-                  className="w-full rounded-lg shadow-md"
-                />
+                <img src="/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png" alt="Team Photo with Trophy" className="w-full rounded-lg shadow-md" />
                 <p className="text-center text-gray-600 text-sm">Team Photo with Trophy</p>
               </div>
             </div>
             
             <div className="mt-6">
-              <img 
-                src="/lovable-uploads/7ab3b6a9-aa17-49fe-a240-7b9b8a2c9a68.png" 
-                alt="Official Competition Results"
-                className="w-full rounded-lg shadow-md"
-              />
+              <img src="/lovable-uploads/7ab3b6a9-aa17-49fe-a240-7b9b8a2c9a68.png" alt="Official Competition Results" className="w-full rounded-lg shadow-md" />
               <p className="text-center text-gray-600 text-sm mt-2">Official Competition Results Document</p>
             </div>
           </div>
@@ -155,8 +123,6 @@ const NLPCFirstPrizePage = () => {
       </div>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default NLPCFirstPrizePage;
