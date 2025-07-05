@@ -1,8 +1,11 @@
+
 import { ArrowLeft, Trophy, Calendar, MapPin, Award, Users } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
 const NLPCFirstPrizePage = () => {
   const navigate = useNavigate();
   const teamMembers = [{
@@ -22,7 +25,9 @@ const NLPCFirstPrizePage = () => {
     email: "deepakkhaladkar5412@gmail.com",
     photo: "/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png"
   }];
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       <div className="pt-20 pb-12">
@@ -78,18 +83,21 @@ const NLPCFirstPrizePage = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {teamMembers.map((member, index) => <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
+              {teamMembers.map((member, index) => (
+                <div key={index} className="bg-white rounded-lg p-6 shadow-sm border">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200">
-                      
-                    </div>
+                    <Avatar className="w-16 h-16">
+                      <AvatarImage src={member.photo} alt={member.name} />
+                      <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                    </Avatar>
                     <div>
                       <h4 className="font-semibold text-lg text-gray-900">{member.name}</h4>
                       <p className="text-gray-600 text-sm">{member.email}</p>
                       <p className="text-primary text-sm font-medium">Team Member</p>
                     </div>
                   </div>
-                </div>)}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -123,6 +131,8 @@ const NLPCFirstPrizePage = () => {
       </div>
 
       <Footer />
-    </div>;
+    </div>
+  );
 };
+
 export default NLPCFirstPrizePage;
