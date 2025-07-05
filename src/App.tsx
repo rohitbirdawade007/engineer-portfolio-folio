@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +14,7 @@ import NLPCFirstPrizePage from "./pages/NLPCFirstPrizePage";
 import NLPCSecondPrizePage from "./pages/NLPCSecondPrizePage";
 import CarromFirstRankPage from "./pages/CarromFirstRankPage";
 import NCRISTResearchPaperPage from "./pages/NCRISTResearchPaperPage";
+import ProjectXpoThirdPrizePage from "./pages/ProjectXpoThirdPrizePage";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +35,7 @@ const App = () => (
           <Route path="/achievements/nlpc-second-prize" element={<NLPCSecondPrizePage />} />
           <Route path="/achievements/carrom-first-rank" element={<CarromFirstRankPage />} />
           <Route path="/achievements/ncrist-research-paper" element={<NCRISTResearchPaperPage />} />
+          <Route path="/achievements/project-xpo-third-prize" element={<ProjectXpoThirdPrizePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
