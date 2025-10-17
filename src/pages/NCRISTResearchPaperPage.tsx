@@ -23,9 +23,9 @@ const NCRISTResearchPaperPage = () => {
       <div className="pt-20 pb-12">
         <div className="container mx-auto px-4 max-w-4xl">
           <Button
-            variant="ghost"
+            variant="outline"
             onClick={() => navigate('/')}
-            className="mb-8 hover:bg-gray-100"
+            className="mb-8"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Portfolio
