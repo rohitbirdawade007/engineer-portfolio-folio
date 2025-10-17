@@ -1,9 +1,12 @@
 
 import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,6 +37,14 @@ const Navbar = () => {
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
+    
+    // If not on homepage, navigate to homepage first
+    if (location.pathname !== "/") {
+      navigate(`/#${sectionId}`);
+      return;
+    }
+    
+    // If on homepage, scroll to section
     const section = document.getElementById(sectionId);
     if (section) {
       const offset = 80; // Account for navbar height
@@ -55,7 +66,12 @@ const Navbar = () => {
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <a href="#" className="text-xl md:text-2xl font-bold text-gradient">Rohit.</a>
+        <button 
+          onClick={() => scrollToSection("home")} 
+          className="text-xl md:text-2xl font-bold text-gradient cursor-pointer"
+        >
+          Rohit.
+        </button>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
