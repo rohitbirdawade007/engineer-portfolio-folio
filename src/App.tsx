@@ -23,6 +23,7 @@ import NCRISTResearchPaperPage from "./pages/NCRISTResearchPaperPage";
 import ProjectXpoThirdPrizePage from "./pages/ProjectXpoThirdPrizePage";
 import AchievementDetailPage from "./pages/AchievementDetailPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
+// import ThesisViewerPage from "./pages/ThesisViewerPage";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -34,20 +35,23 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/projects/plant-disease" element={<PlantDiseasePage />} />
-          <Route path="/projects/retinopathy" element={<RetinopathyPage />} />
-          <Route path="/projects/smart-agriculture" element={<SmartAgriculturePage />} />
-          <Route path="/awards/student-of-computer-department" element={<StudentAwardPage />} />
-          <Route path="/awards/excellence-of-the-year" element={<ExcellenceAwardPage />} />
-          <Route path="/achievements/nlpc-first-prize" element={<NLPCFirstPrizePage />} />
-          <Route path="/achievements/nlpc-second-prize" element={<NLPCSecondPrizePage />} />
-          <Route path="/achievements/carrom-first-rank" element={<CarromFirstRankPage />} />
-          <Route path="/achievements/ncrist-research-paper" element={<NCRISTResearchPaperPage />} />
-          <Route path="/achievements/project-xpo-third-prize" element={<ProjectXpoThirdPrizePage />} />
+          <Route path="/projects/plant-disease" element={<ProjectDetailPage />} />
+          <Route path="/projects/retinopathy" element={<ProjectDetailPage />} />
+          <Route path="/projects/smart-agriculture" element={<ProjectDetailPage />} />
+          <Route path="/awards/student-of-computer-department" element={<AchievementDetailPage />} />
+          <Route path="/awards/excellence-of-the-year" element={<AchievementDetailPage />} />
+          <Route path="/achievements/student-of-computer-department" element={<AchievementDetailPage />} />
+          <Route path="/achievements/excellence-of-the-year" element={<AchievementDetailPage />} />
+          <Route path="/achievements/nlpc-first-prize" element={<AchievementDetailPage />} />
+          <Route path="/achievements/nlpc-second-prize" element={<AchievementDetailPage />} />
+          <Route path="/achievements/carrom-first-rank" element={<AchievementDetailPage />} />
+          <Route path="/achievements/ncrist-research-paper" element={<AchievementDetailPage />} />
+          <Route path="/achievements/project-xpo-third-prize" element={<AchievementDetailPage />} />
           
           {/* Dynamic Routes for items added via Admin */}
           <Route path="/achievements/:id" element={<AchievementDetailPage />} />
           <Route path="/projects/:id" element={<ProjectDetailPage />} />
+          {/* <Route path="/thesis" element={<ThesisViewerPage />} /> */}
           
           {/* Admin Routes */}
           <Route path="/admin/login" element={
