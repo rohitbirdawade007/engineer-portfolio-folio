@@ -1,4 +1,4 @@
-export const API_URL = import.meta.env.VITE_API_URL || "https://rohit-portfolio-qgd8.onrender.com/api";
+export const API_URL = import.meta.env.VITE_API_URL || "https://my-new-port-yg49.onrender.com/api";
 export const BASE_URL = API_URL.replace('/api', '');
 
 /**
