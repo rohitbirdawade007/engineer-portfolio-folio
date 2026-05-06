@@ -1,9 +1,14 @@
+import React, { lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
+
+const AdminLayout = lazy(() => import("./admin/AdminLayout"));
+const Login = lazy(() => import("./admin/Login"));
+const Register = lazy(() => import("./admin/Register"));
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PlantDiseasePage from "./pages/PlantDiseasePage";
@@ -16,7 +21,8 @@ import NLPCSecondPrizePage from "./pages/NLPCSecondPrizePage";
 import CarromFirstRankPage from "./pages/CarromFirstRankPage";
 import NCRISTResearchPaperPage from "./pages/NCRISTResearchPaperPage";
 import ProjectXpoThirdPrizePage from "./pages/ProjectXpoThirdPrizePage";
-
+import AchievementDetailPage from "./pages/AchievementDetailPage";
+import ProjectDetailPage from "./pages/ProjectDetailPage";
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -38,6 +44,28 @@ const App = () => (
           <Route path="/achievements/carrom-first-rank" element={<CarromFirstRankPage />} />
           <Route path="/achievements/ncrist-research-paper" element={<NCRISTResearchPaperPage />} />
           <Route path="/achievements/project-xpo-third-prize" element={<ProjectXpoThirdPrizePage />} />
+          
+          {/* Dynamic Routes for items added via Admin */}
+          <Route path="/achievements/:id" element={<AchievementDetailPage />} />
+          <Route path="/projects/:id" element={<ProjectDetailPage />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <Login />
+            </React.Suspense>
+          } />
+          <Route path="/admin/register" element={
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <Register />
+            </React.Suspense>
+          } />
+          <Route path="/admin/*" element={
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <AdminLayout />
+            </React.Suspense>
+          } />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
