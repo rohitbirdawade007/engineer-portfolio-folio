@@ -2,8 +2,12 @@
   "version": 2,
   "rewrites": [
     {
-      "source": "/(api|uploads)/:path*",
-      "destination": "https://my-new-port-yg49.onrender.com/:1/:path*"
+      "source": "/api/:path*",
+      "destination": "https://my-new-port-yg49.onrender.com/api/:path*"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "https://my-new-port-yg49.onrender.com/uploads/:path*"
     },
     {
       "source": "/(.*)",
