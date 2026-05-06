@@ -36,13 +36,46 @@ const profileData = {
 const achievementsData = [
   {
     title: 'Excellence of the Year Award',
-    organization: "Shri Chhatrapati Shivajiraje College of Engineering",
-    date: 'A.Y. 2024-25',
+    organization: "Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering",
+    date: 'Academic Year 2024–25',
     type: 'award',
     category: 'achievements',
-    description: 'Honored to receive the "Excellence of the Year" Award for outstanding contributions to technical and non-technical activities.',
+    description: 'This prestigious award was conferred in recognition of outstanding contributions to technical and non-technical activities at University, State, and National levels.',
     image: "/lovable-uploads/ce935f5a-f5f3-4a0b-bae5-f403b99e1b88.png",
-    slug: 'excellence-of-the-year-award'
+    images: [
+      "/lovable-uploads/ce935f5a-f5f3-4a0b-bae5-f403b99e1b88.png",
+      "/lovable-uploads/9e121016-b764-4662-9f3d-7a8d954cd754.png"
+    ],
+    highlights: [
+      "Outstanding contributions to technical activities",
+      "National and State level recognition",
+      "Active involvement in institutional leadership",
+      "Consistency in academic and project excellence"
+    ],
+    slug: 'excellence-of-the-year',
+    hasDetailPage: true
+  },
+  {
+    title: 'Student of the Computer Department',
+    organization: "Rajgad Dnyanpeeth's Shri Chhatrapati Shivajiraje College of Engineering",
+    date: 'Academic Year 2024–25',
+    type: 'award',
+    category: 'achievements',
+    description: 'This prestigious award was presented to recognize outstanding performance and achievements in both curricular and extracurricular activities throughout the graduation period.',
+    image: "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png",
+    images: [
+      "/lovable-uploads/894da7a4-76d8-4fbd-b7a8-350ad577b1b6.png",
+      "/lovable-uploads/b652b495-14ff-43e6-8db5-1a6865a68549.png",
+      "/lovable-uploads/1f4a7524-974e-43ee-a52c-0068c3221a0b.png"
+    ],
+    highlights: [
+      "Excellence in academic performance",
+      "Leadership qualities and contribution to department",
+      "Holistic development throughout graduation",
+      "Peer mentoring and community impact"
+    ],
+    slug: 'student-of-computer-department',
+    hasDetailPage: true
   },
   {
     title: '1st Prize at National Level Project Competition (NLPC-2025)',
@@ -52,7 +85,19 @@ const achievementsData = [
     category: 'achievements',
     description: '🥇 First place winner at the prestigious National Level Project Competition for the project "AI and IoT Integration for Sustainable Agriculture".',
     image: "/lovable-uploads/7ab3b6a9-aa17-49fe-a240-7b9b8a2c9a68.png",
-    slug: 'nlpc-2025-first-prize-mmcoe'
+    images: [
+      "/lovable-uploads/c2d55d26-227c-46bf-8a51-ea3877bc1083.png",
+      "/lovable-uploads/99c9a67a-b0ae-42f3-97c6-0609b27b6eb8.png",
+      "/lovable-uploads/7ab3b6a9-aa17-49fe-a240-7b9b8a2c9a68.png"
+    ],
+    highlights: [
+      "National level recognition",
+      "Evaluated by industry experts",
+      "AI & IoT integration for Agriculture",
+      "Innovative and sustainable solution"
+    ],
+    slug: 'nlpc-2025-first-prize-mmcoe',
+    hasDetailPage: true
   },
   {
     title: 'State Level Project Competition - Participant',
@@ -62,7 +107,28 @@ const achievementsData = [
     category: 'achievements',
     description: 'Participated in State Level Project Competition under Anant Nirmal Techutsav 2K25.',
     image: "/lovable-uploads/20e20354-9542-4315-a9ce-3976d34a7c89.png",
-    slug: 'state-level-techutsav-2k25'
+    slug: 'state-level-techutsav-2k25',
+    hasDetailPage: true
+  },
+  {
+    title: '1st Rank in Carrom Championship',
+    organization: 'Rajgad Dnyanpeeth Technical Campus',
+    date: '2024-25',
+    type: 'award',
+    category: 'extracurricular',
+    description: '🥇 Secured the first rank in Carrom competition during Anantmahotsav 2024–25, demonstrating excellence in sports alongside academic pursuits.',
+    image: "/lovable-uploads/b4a3c512-e6a1-42df-95ec-31a58de02a37.png",
+    images: [
+      "/lovable-uploads/b4a3c512-e6a1-42df-95ec-31a58de02a37.png"
+    ],
+    highlights: [
+      "Secured 1st rank at Anantmahotsav 2024-25",
+      "Demonstrated strategic thinking and precision",
+      "Active participation in campus sports culture",
+      "Balancing academic and athletic excellence"
+    ],
+    slug: 'carrom-first-rank',
+    hasDetailPage: true
   }
 ];
 

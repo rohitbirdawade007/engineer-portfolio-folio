@@ -9,7 +9,8 @@ const AchievementSchema = new mongoose.Schema({
   description:     { type: String },
   fullDescription: { type: String },
   images:          [{ type: String }],
-  slug:            { type: String, unique: true, sparse: true }
+  slug:            { type: String, unique: true, sparse: true },
+  hasDetailPage:   { type: Boolean, default: true }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Achievement', AchievementSchema);

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Achievement = require('../models/Achievement');
 const auth = require('../middleware/auth');
+const upload = require('../middleware/upload');
 
 // @route   GET /api/achievements
 // @desc    Get all achievements
@@ -40,9 +41,19 @@ router.get('/:id', async (req, res) => {
 // @route   POST /api/achievements
 // @desc    Create an achievement
 // @access  Private
-router.post('/', auth, async (req, res) => {
+router.post('/', [auth, upload.array('images', 5)], async (req, res) => {
   try {
-    const achievement = new Achievement(req.body);
+    const data = { ...req.body };
+    
+    // Handle uploaded files
+    if (req.files && req.files.length > 0) {
+      data.images = req.files.map(file => `/uploads/${file.filename}`);
+    } else if (req.body.image) {
+      // Compatibility for single image field
+      data.images = [req.body.image];
+    }
+
+    const achievement = new Achievement(data);
     await achievement.save();
     res.json(achievement);
   } catch (err) {
@@ -54,9 +65,19 @@ router.post('/', auth, async (req, res) => {
 // @route   PUT /api/achievements/:id
 // @desc    Update an achievement
 // @access  Private
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', [auth, upload.array('images', 5)], async (req, res) => {
   try {
-    const achievement = await Achievement.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const data = { ...req.body };
+    
+    // Handle newly uploaded files
+    if (req.files && req.files.length > 0) {
+      const newImages = req.files.map(file => `/uploads/${file.filename}`);
+      // Append or replace? Let's replace for simplicity or append if they want more.
+      // Most users expect replace when uploading new ones in a simple manager.
+      data.images = newImages;
+    }
+
+    const achievement = await Achievement.findByIdAndUpdate(req.params.id, data, { new: true });
     if (!achievement) return res.status(404).json({ msg: 'Achievement not found' });
     res.json(achievement);
   } catch (err) {

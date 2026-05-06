@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getAchievements, createAchievement, updateAchievement, deleteAchievement } from '@/services/api';
-import { Plus, Pencil, Trash2, X, Save, Trophy, Medal, Target, Star, ArrowUpRight, GraduationCap } from 'lucide-react';
+import { getAchievements, API_URL, getAssetUrl } from '@/services/api';
+import { Plus, Pencil, Trash2, X, Save, Trophy, Medal, Target, Star, ArrowUpRight, Image as ImageIcon, Upload } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,7 @@ interface Achievement {
   description: string;
   fullDescription: string;
   slug: string;
+  images?: string[];
 }
 
 const EMPTY: Achievement = {
@@ -33,6 +34,7 @@ const AchievementManager = () => {
   const [editing, setEditing] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [files, setFiles] = useState<FileList | null>(null);
 
   const load = () => {
     setLoading(true);
@@ -55,17 +57,42 @@ const AchievementManager = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    try {
-      if (editing) {
-        await updateAchievement(editing, form);
-      } else {
-        await createAchievement(form);
+    
+    const token = localStorage.getItem('adminToken');
+    const data = new FormData();
+    
+    // Append all text fields
+    Object.entries(form).forEach(([key, value]) => {
+      if (key !== 'images' && key !== '_id') {
+        data.append(key, value as string);
       }
-      setShowForm(false);
-      setEditing(null);
-      setForm(EMPTY);
-      load();
-      toast.success(editing ? "Node recalibrated successfully" : "Achievement synchronized successfully");
+    });
+    
+    // Append files
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        data.append('images', files[i]);
+      }
+    }
+
+    try {
+      const url = editing ? `${API_URL}/achievements/${editing}` : `${API_URL}/achievements`;
+      const response = await fetch(url, {
+        method: editing ? 'PUT' : 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: data,
+      });
+
+      if (response.ok) {
+        setShowForm(false);
+        setEditing(null);
+        setForm(EMPTY);
+        setFiles(null);
+        load();
+        toast.success(editing ? "Node recalibrated successfully" : "Achievement synchronized successfully");
+      } else {
+        toast.error('Database rejection');
+      }
     } catch (err) {
       toast.error('System synchronization failure');
     } finally {
@@ -82,9 +109,15 @@ const AchievementManager = () => {
   const handleDelete = async (id: string) => {
     if (!confirm('Proceed with data deletion?')) return;
     try {
-      await deleteAchievement(id);
-      toast.success("Achievement purged");
-      load();
+      const token = localStorage.getItem('adminToken');
+      const res = await fetch(`${API_URL}/achievements/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) {
+        toast.success("Achievement purged");
+        load();
+      }
     } catch (e) {
       toast.error("Cleanup failure");
     }
@@ -98,7 +131,7 @@ const AchievementManager = () => {
           <p className="text-muted-foreground font-medium text-lg">Manage professional awards, certifications, and milestones.</p>
         </div>
         <Button
-          onClick={() => { setForm(EMPTY); setEditing(null); setShowForm(true); }}
+          onClick={() => { setForm(EMPTY); setEditing(null); setFiles(null); setShowForm(true); }}
           className="bg-primary hover:bg-primary/90 text-white rounded-2xl h-14 px-8 font-black uppercase tracking-widest shadow-xl shadow-primary/20 active:scale-95 transition-all"
         >
           <Plus size={18} className="mr-2" /> Add Achievement
@@ -156,6 +189,24 @@ const AchievementManager = () => {
                     </div>
 
                     <div className="md:col-span-2 space-y-3">
+                      <Label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Upload Assets (Images)</Label>
+                      <div className="relative h-14 w-full">
+                        <Input 
+                          type="file" 
+                          multiple 
+                          onChange={(e) => setFiles(e.target.files)} 
+                          className="absolute inset-0 opacity-0 cursor-pointer z-10" 
+                        />
+                        <div className="h-full w-full bg-slate-50/50 border border-dashed border-border rounded-2xl flex items-center px-4 gap-3">
+                          <Upload size={18} className="text-primary" />
+                          <span className="text-sm font-bold text-muted-foreground">
+                            {files ? `${files.length} files selected` : "Choose certification images..."}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="md:col-span-2 space-y-3">
                       <Label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Teaser Abstract</Label>
                       <Textarea name="description" value={form.description} onChange={handleChange} className="min-h-[80px] bg-slate-50/50 border-border rounded-2xl font-medium" />
                     </div>
@@ -188,36 +239,45 @@ const AchievementManager = () => {
           items.map((item, idx) => (
             <motion.div key={item._id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: idx * 0.05 }}>
                <Card className="group border border-border bg-card rounded-[3rem] overflow-hidden hover:shadow-2xl transition-all duration-500 shadow-sm flex flex-col h-full">
-                  <CardHeader className="p-10 pb-4 flex flex-row items-start justify-between">
+                  <div className="h-40 bg-slate-50 relative overflow-hidden">
+                    {item.images && item.images.length > 0 ? (
+                      <img src={getAssetUrl(item.images[0])} alt={item.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-slate-50 text-slate-200">
+                        <ImageIcon size={48} />
+                      </div>
+                    )}
+                  </div>
+                  <CardHeader className="p-8 pb-4 flex flex-row items-start justify-between">
                      <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-3">
-                           <div className="w-10 h-10 rounded-2xl bg-primary/5 text-primary flex items-center justify-center shadow-sm">
-                              {item.type === 'award' ? <Trophy size={18} /> : 
-                               item.type === 'certification' ? <Medal size={18} /> : 
-                               <Star size={18} />}
+                           <div className="w-8 h-8 rounded-xl bg-primary/5 text-primary flex items-center justify-center shadow-sm">
+                              {item.type === 'award' ? <Trophy size={14} /> : 
+                               item.type === 'certification' ? <Medal size={14} /> : 
+                               <Star size={14} />}
                            </div>
                            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{item.type}</span>
                         </div>
-                        <h3 className="text-xl font-black text-foreground tracking-tighter uppercase italic line-clamp-2 leading-tight group-hover:text-primary transition-colors">
+                        <h3 className="text-lg font-black text-foreground tracking-tighter uppercase italic line-clamp-2 leading-tight group-hover:text-primary transition-colors">
                            {item.title}
                         </h3>
                      </div>
                      <div className="flex flex-col gap-2 ml-4">
-                        <Button size="icon" variant="ghost" onClick={() => handleEdit(item)} className="h-10 w-10 rounded-xl bg-slate-50 hover:bg-primary/5 text-primary transition-all border border-border"><Pencil size={14}/></Button>
-                        <Button size="icon" variant="ghost" onClick={() => handleDelete(item._id!)} className="h-10 w-10 rounded-xl bg-rose-50/50 hover:bg-rose-50 text-rose-500 transition-all border border-rose-100"><Trash2 size={14}/></Button>
+                        <Button size="icon" variant="ghost" onClick={() => handleEdit(item)} className="h-9 w-9 rounded-xl bg-slate-50 hover:bg-primary/5 text-primary transition-all border border-border"><Pencil size={12}/></Button>
+                        <Button size="icon" variant="ghost" onClick={() => handleDelete(item._id!)} className="h-9 w-9 rounded-xl bg-rose-50/50 hover:bg-rose-50 text-rose-500 transition-all border border-rose-100"><Trash2 size={12}/></Button>
                      </div>
                   </CardHeader>
-                  <CardContent className="p-10 pt-0 flex flex-col flex-1">
-                     <p className="text-sm font-bold text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <Target size={12} className="text-primary" /> {item.organization}
+                  <CardContent className="p-8 pt-0 flex flex-col flex-1">
+                     <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <Target size={10} className="text-primary" /> {item.organization}
                      </p>
-                     <p className="text-muted-foreground text-sm font-medium line-clamp-3 mb-8 italic italic">
+                     <p className="text-muted-foreground text-xs font-medium line-clamp-2 mb-6 italic">
                         "{item.description}"
                      </p>
                      <div className="mt-auto flex items-center justify-between pt-6 border-t border-border">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground bg-slate-50 px-3 py-1 rounded-full">{item.date}</span>
+                        <span className="text-[9px] font-black uppercase tracking-widest text-muted-foreground bg-slate-50 px-2 py-0.5 rounded-full">{item.date}</span>
                         <div className="text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                           <ArrowUpRight size={20} />
+                           <ArrowUpRight size={16} />
                         </div>
                      </div>
                   </CardContent>
