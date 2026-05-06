@@ -4,6 +4,16 @@ import { getProject, getAssetUrl } from "@/services/api";
 import { FALLBACK_PROJECTS } from "@/services/fallbackData";
 import { ArrowLeft, Code, Loader2, Github, ExternalLink, Box } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import PremiumSlider from "@/components/PremiumSlider";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import NotFound from "./NotFound";
 
 const ProjectDetailPage = () => {
@@ -74,28 +84,57 @@ const ProjectDetailPage = () => {
         </div>
       </div>
 
+      <Navbar />
+      
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-slate-900 to-slate-800 pt-32 pb-20 relative overflow-hidden text-white">
+        <div className="absolute top-0 right-0 p-24 opacity-5 pointer-events-none">
+          <Box size={200} />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight">
+            {project.title}
+          </h1>
+          
+          <div className="flex flex-wrap gap-2 mb-8">
+            {techStack.map((tech: string, index: number) => (
+              <Badge key={index} variant="secondary" className="bg-white/10 hover:bg-white/20 text-white border-none px-4 py-1">
+                {tech}
+              </Badge>
+            ))}
+          </div>
+          
+          <p className="text-xl text-slate-300 max-w-3xl font-medium leading-relaxed">
+            {project.problemStatement || project.description}
+          </p>
+        </div>
+      </div>
+
       {/* Content Section */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
           
           {/* Main Content */}
-          <div className="lg:col-span-2 space-y-12">
+          <div className="lg:col-span-8 space-y-12">
             {imageUrl && (
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-50">
-                <img 
-                  src={imageUrl} 
-                  alt={project.title} 
-                  className="w-full h-auto object-cover max-h-[500px]"
+              <div className="-mx-4 md:-mx-12">
+                <PremiumSlider 
+                  images={[imageUrl]} 
+                  title={project.title}
+                  location={project.techStack?.join(', ')}
                 />
               </div>
             )}
             
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
-              <h2 className="text-2xl font-bold mb-6 text-slate-800">Project Details</h2>
-              <div className="prose prose-lg text-slate-600 leading-relaxed max-w-none">
+            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100">
+              <h2 className="text-3xl font-black mb-8 text-slate-900 flex items-center gap-4">
+                <span className="w-2 h-10 bg-primary rounded-full"></span>
+                Project Deep Dive
+              </h2>
+              <div className="prose prose-lg prose-slate text-slate-600 leading-relaxed max-w-none font-medium">
                 {project.description ? (
                   project.description.split('\n').map((paragraph: string, i: number) => (
-                    <p key={i} className="mb-4">{paragraph}</p>
+                    <p key={i} className="mb-6">{paragraph}</p>
                   ))
                 ) : (
                   <p>No detailed description provided.</p>
