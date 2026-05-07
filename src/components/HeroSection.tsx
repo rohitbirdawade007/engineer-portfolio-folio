@@ -41,10 +41,14 @@ const HeroSection = () => {
               {/* Pulsing Core Glow */}
               <div className="absolute w-80 h-80 bg-primary/20 rounded-full blur-2xl animate-solar-pulse"></div>
               
-              {/* Rotating Solar Rays */}
-              <div className="absolute w-[120%] h-[120%] animate-solar-rotate opacity-30 pointer-events-none">
-                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(108,99,255,0.2)_10deg,transparent_20deg)]"></div>
-                <div className="absolute inset-0 bg-[conic-gradient(from_180deg,transparent_0deg,rgba(56,189,248,0.2)_10deg,transparent_20deg)]"></div>
+              {/* Stylized Wavy Sun - Layer 1 (CW) */}
+              <div className="absolute w-[160%] h-[160%] animate-solar-cw opacity-40 pointer-events-none">
+                <img src="/sun-symbol.png" alt="" className="w-full h-full object-contain filter drop-shadow-2xl" />
+              </div>
+
+              {/* Stylized Wavy Sun - Layer 2 (CCW & Larger) */}
+              <div className="absolute w-[190%] h-[190%] animate-solar-ccw opacity-20 pointer-events-none">
+                <img src="/sun-symbol.png" alt="" className="w-full h-full object-contain filter blur-[2px]" />
               </div>
             </div>
 
