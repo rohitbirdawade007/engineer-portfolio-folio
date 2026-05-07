@@ -29,35 +29,26 @@ const HeroSection = () => {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 left-1/5 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
-        
-        {/* Rolling Coin Path (Reference Inspired) */}
-        <div className="absolute bottom-[20%] right-[10%] w-[40%] h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent rotate-[-15deg] opacity-50"></div>
-        
-        {/* Animated 3D Coin 1 */}
-        <div className="absolute bottom-[22%] right-[15%] w-32 h-32 animate-float-path pointer-events-none">
-          <img 
-            src="/tech-coin.png" 
-            alt="3D Coin" 
-            className="w-full h-full object-contain animate-coin drop-shadow-2xl"
-          />
-        </div>
-        
-        {/* Animated 3D Coin 2 (Delayed) */}
-        <div className="absolute bottom-[22%] right-[15%] w-32 h-32 animate-float-path pointer-events-none" style={{ animationDelay: '4s' }}>
-          <img 
-            src="/tech-coin.png" 
-            alt="3D Coin" 
-            className="w-full h-full object-contain animate-coin drop-shadow-2xl"
-            style={{ animationDuration: '6s' }}
-          />
-        </div>
       </div>
       
       <div className="container mx-auto px-4 py-20">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Profile Image */}
-          <div className="order-1 md:order-2 md:w-1/3 flex justify-center mb-8 md:mb-0">
-            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-primary/30 shadow-xl bg-slate-100 flex items-center justify-center">
+          {/* Profile Image with Solar Flare */}
+          <div className="order-1 md:order-2 md:w-1/3 flex justify-center mb-8 md:mb-0 relative">
+            
+            {/* Solar Aura Layers */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              {/* Pulsing Core Glow */}
+              <div className="absolute w-80 h-80 bg-primary/20 rounded-full blur-2xl animate-solar-pulse"></div>
+              
+              {/* Rotating Solar Rays */}
+              <div className="absolute w-[120%] h-[120%] animate-solar-rotate opacity-30 pointer-events-none">
+                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(108,99,255,0.2)_10deg,transparent_20deg)]"></div>
+                <div className="absolute inset-0 bg-[conic-gradient(from_180deg,transparent_0deg,rgba(56,189,248,0.2)_10deg,transparent_20deg)]"></div>
+              </div>
+            </div>
+
+            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl bg-slate-100 flex items-center justify-center z-10">
               {isLoading ? (
                 <Loader2 className="animate-spin text-primary" />
               ) : (
