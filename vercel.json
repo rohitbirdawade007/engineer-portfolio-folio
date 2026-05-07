@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -11,7 +10,7 @@
       "destination": "https://my-new-port-yg49.onrender.com/uploads/$1"
     },
     {
-      "source": "/((?!api|uploads).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
