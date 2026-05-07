@@ -5,14 +5,30 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { API_URL } from '@/services/api';
-import { ShieldCheck, Lock, User, ArrowLeft, Loader2, KeyRound, Cpu } from "lucide-react";
+import { API_URL, resetAdminPassword } from '@/services/api';
+import { ShieldCheck, Lock, User, ArrowLeft, Loader2, KeyRound, Cpu, LifeBuoy } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Reset Password State
+  const [resetUsername, setResetUsername] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [masterToken, setMasterToken] = useState('');
+  const [resetLoading, setResetLoading] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +54,33 @@ const Login = () => {
       toast.error("Network error. Firewall interference or server offline.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setResetLoading(true);
+
+    try {
+      const data = await resetAdminPassword({
+        username: resetUsername,
+        newPassword,
+        masterToken
+      });
+
+      if (data.success) {
+        toast.success("Security override successful. Password updated.");
+        setIsDialogOpen(false);
+        setResetUsername('');
+        setNewPassword('');
+        setMasterToken('');
+      } else {
+        toast.error(data.msg || "Reset failed. Check your Master Token.");
+      }
+    } catch (error) {
+      toast.error("Connection failed during override.");
+    } finally {
+      setResetLoading(false);
     }
   };
 
@@ -82,7 +125,65 @@ const Login = () => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-xs font-semibold text-muted-foreground">Password</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password" className="text-xs font-semibold text-muted-foreground">Password</Label>
+                  
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <button type="button" className="text-xs font-medium text-primary hover:underline">
+                        Forgot Password?
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Security Override</DialogTitle>
+                        <DialogDescription>
+                          Provide your Admin Master Token from your .env file to reset access.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <form onSubmit={handleResetPassword} className="space-y-4 py-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="reset-user">Admin Username</Label>
+                          <Input 
+                            id="reset-user" 
+                            placeholder="username" 
+                            value={resetUsername}
+                            onChange={(e) => setResetUsername(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="reset-token">Master Registration Token</Label>
+                          <Input 
+                            id="reset-token" 
+                            type="password" 
+                            placeholder="••••••••" 
+                            value={masterToken}
+                            onChange={(e) => setMasterToken(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="new-pass">New Password</Label>
+                          <Input 
+                            id="new-pass" 
+                            type="password" 
+                            placeholder="New password" 
+                            value={newPassword}
+                            onChange={(e) => setNewPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <DialogFooter>
+                          <Button type="submit" className="w-full" disabled={resetLoading}>
+                            {resetLoading ? <Loader2 className="animate-spin mr-2" /> : <ShieldCheck className="mr-2" size={16} />}
+                            Authorize Password Reset
+                          </Button>
+                        </DialogFooter>
+                      </form>
+                    </DialogContent>
+                  </Dialog>
+                </div>
                 <div className="relative group">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" size={18} />
                   <Input
@@ -128,3 +229,4 @@ const Login = () => {
 };
 
 export default Login;
+

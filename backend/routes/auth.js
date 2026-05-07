@@ -67,6 +67,29 @@ router.post('/register', asyncHandler(async (req, res) => {
   res.status(201).json({ success: true, msg: 'Admin registered successfully' });
 }));
 
+// @route   POST api/auth/reset-password
+// @desc    Reset admin password using Master Token
+router.post('/reset-password', asyncHandler(async (req, res) => {
+  const { username, newPassword, masterToken } = req.body;
+
+  if (masterToken !== process.env.ADMIN_REGISTRATION_TOKEN) {
+    logger.error(`CRITICAL: Unauthorized password reset attempt from IP: ${req.ip}`);
+    return res.status(403).json({ success: false, msg: 'Unauthorized' });
+  }
+
+  const admin = await Admin.findOne({ username });
+  if (!admin) {
+    return res.status(404).json({ success: false, msg: 'Admin not found' });
+  }
+
+  const salt = await bcrypt.genSalt(12);
+  admin.password = await bcrypt.hash(newPassword, salt);
+  await admin.save();
+
+  logger.info(`Admin password reset via master token: ${username}`);
+  res.json({ success: true, msg: 'Password reset successfully' });
+}));
+
 // @route   GET api/auth/me
 router.get('/me', auth, asyncHandler(async (req, res) => {
   const admin = await Admin.findById(req.admin.id).select('-password');
