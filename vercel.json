@@ -1,18 +1,16 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "framework": "vite",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://my-new-port-yg49.onrender.com/api/:path*"
+      "source": "/api/(.*)",
+      "destination": "https://my-new-port-yg49.onrender.com/api/$1"
     },
     {
-      "source": "/uploads/:path*",
-      "destination": "https://my-new-port-yg49.onrender.com/uploads/:path*"
+      "source": "/uploads/(.*)",
+      "destination": "https://my-new-port-yg49.onrender.com/uploads/$1"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api|uploads).*)",
       "destination": "/index.html"
     }
   ]
