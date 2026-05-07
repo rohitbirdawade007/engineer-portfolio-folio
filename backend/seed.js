@@ -152,6 +152,18 @@ const projectsData = [
     featured: true,
     image: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png",
     slug: 'guardian-eye-missing-person'
+  },
+  {
+    title: "AI-Based Personalized Diet System",
+    problemStatement: "Providing personalized nutrition advice based on health data is a complex task for traditional software.",
+    description: "A machine learning application built with Python and Streamlit that predicts personalized diet categories based on health parameters like BMI and activity level.",
+    tags: ["Python", "Scikit-Learn", "Streamlit", "Machine Learning"],
+    category: "Machine Learning",
+    featured: true,
+    image: "https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=800",
+    githubLink: "https://github.com/rohitbirdawade007/Diet-Prediction-App",
+    demoLink: "https://share.streamlit.io/",
+    slug: 'ai-personalized-diet-system'
   }
 ];
 
