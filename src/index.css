@@ -126,36 +126,6 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
   }
-
-  /* Solar Flare Animations */
-  @keyframes solar-rotate-cw {
-    0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.1); }
-    100% { transform: rotate(360deg) scale(1); }
-  }
-
-  @keyframes solar-rotate-ccw {
-    0% { transform: rotate(360deg) scale(1.1); }
-    50% { transform: rotate(180deg) scale(1); }
-    100% { transform: rotate(0deg) scale(1.1); }
-  }
-
-  @keyframes solar-pulse {
-    0%, 100% { opacity: 0.6; transform: scale(1); filter: blur(20px); }
-    50% { opacity: 0.9; transform: scale(1.1); filter: blur(30px); }
-  }
-
-  .animate-solar-cw {
-    animation: solar-rotate-cw 15s linear infinite;
-  }
-
-  .animate-solar-ccw {
-    animation: solar-rotate-ccw 20s linear infinite;
-  }
-
-  .animate-solar-pulse {
-    animation: solar-pulse 4s ease-in-out infinite;
-  }
 }
 
 /* Font */

@@ -33,26 +33,9 @@ const HeroSection = () => {
       
       <div className="container mx-auto px-4 py-20">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* Profile Image with Solar Flare */}
-          <div className="order-1 md:order-2 md:w-1/3 flex justify-center mb-8 md:mb-0 relative">
-            
-            {/* Solar Aura Layers */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              {/* Pulsing Core Glow */}
-              <div className="absolute w-80 h-80 bg-primary/20 rounded-full blur-2xl animate-solar-pulse"></div>
-              
-              {/* Stylized Wavy Sun - Layer 1 (CW) */}
-              <div className="absolute w-[160%] h-[160%] animate-solar-cw opacity-40 pointer-events-none">
-                <img src="/sun-symbol.png" alt="" className="w-full h-full object-contain filter drop-shadow-2xl" />
-              </div>
-
-              {/* Stylized Wavy Sun - Layer 2 (CCW & Larger) */}
-              <div className="absolute w-[190%] h-[190%] animate-solar-ccw opacity-20 pointer-events-none">
-                <img src="/sun-symbol.png" alt="" className="w-full h-full object-contain filter blur-[2px]" />
-              </div>
-            </div>
-
-            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl bg-slate-100 flex items-center justify-center z-10">
+          {/* Profile Image */}
+          <div className="order-1 md:order-2 md:w-1/3 flex justify-center mb-8 md:mb-0">
+            <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-primary/30 shadow-2xl bg-slate-100 flex items-center justify-center">
               {isLoading ? (
                 <Loader2 className="animate-spin text-primary" />
               ) : (
