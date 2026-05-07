@@ -17,7 +17,15 @@ const ProjectsSection = () => {
     queryFn: getProjects
   });
 
-  const projects = apiProjects.length > 0 ? apiProjects : FALLBACK_PROJECTS;
+  const dietProject = FALLBACK_PROJECTS.find(p => p.id === 'diet-prediction');
+  
+  // Combine API projects with the diet project if it's not already in the API response
+  const combinedProjects = [...apiProjects];
+  if (dietProject && !apiProjects.find((p: any) => p.slug === 'diet-prediction' || p.id === 'diet-prediction')) {
+    combinedProjects.unshift(dietProject);
+  }
+
+  const projects = combinedProjects.length > 0 ? combinedProjects : FALLBACK_PROJECTS;
 
   return (
     <section id="projects" className="py-20">
