@@ -9,6 +9,7 @@ const AchievementSchema = new mongoose.Schema({
   description:     { type: String },
   fullDescription: { type: String },
   images:          [{ type: String }],
+  highlights:      [{ type: String }],
   slug:            { type: String, unique: true, sparse: true },
   hasDetailPage:   { type: Boolean, default: true }
 }, { timestamps: true });

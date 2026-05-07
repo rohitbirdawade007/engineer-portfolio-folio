@@ -8,6 +8,7 @@ const ProjectSchema = new mongoose.Schema({
   description:      { type: String },
   fullDescription:  { type: String },
   tags:             [{ type: String }],
+  techStack:        [{ type: String }], // for consistency with Experience
   image:            { type: String }, // kept for backward compat
   images:           [{ type: String }],
   architectureImage:{ type: String }, // NEW

@@ -43,20 +43,20 @@ const ExperienceSection = () => {
                     <div className="md:w-32 flex items-start">
                       <div className="flex items-center gap-2 bg-white md:pr-4">
                         <CalendarIcon size={18} className="text-primary shrink-0" />
-                        <span className="text-gray-600 font-medium">{experience.period}</span>
+                        <span className="text-gray-600 font-medium">{experience.duration || experience.period}</span>
                       </div>
                     </div>
                     
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <BriefcaseIcon size={18} className="text-primary shrink-0" />
-                        <h3 className="text-xl font-bold">{experience.title}</h3>
+                        <h3 className="text-xl font-bold">{experience.role || experience.title}</h3>
                       </div>
                       <p className="text-gray-700 font-medium mb-3">{experience.company}</p>
                       <p className="text-gray-600 mb-4">{experience.description}</p>
                       
                       <div className="flex flex-wrap gap-2">
-                        {(experience.skills || []).map((skill: string, skillIndex: number) => (
+                        {(experience.techStack || experience.skills || []).map((skill: string, skillIndex: number) => (
                           <Badge 
                             key={skillIndex} 
                             variant="secondary"
@@ -95,10 +95,10 @@ const ExperienceSection = () => {
                         </h3>
                         <p className="text-gray-700 mb-2">{item.authors}</p>
                         <p className="text-gray-600 mb-3">
-                          <span className="font-medium">{item.journal}</span>, {item.year}. {item.volume}
+                          <span className="font-medium">{item.journal}</span>, {item.year}. {item.status}
                         </p>
                         <a 
-                          href={item.url || item.demoUrl} 
+                          href={item.link || item.url || item.demoUrl} 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"

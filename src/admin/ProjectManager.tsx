@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
-import { API_URL, getAssetUrl } from '@/services/api';
+import { getProjects, createProject, updateProject, deleteProject, getAssetUrl } from '@/services/api';
 import { Plus, Trash2, Edit, Globe, Github, Star, Layout, FileText, CheckCircle2, Package, ArrowLeft } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
@@ -42,11 +42,13 @@ const ProjectManager = () => {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch(`${API_URL}/projects`);
-      const data = await res.json();
+      const data = await getProjects();
       setProjects(Array.isArray(data) ? data : []);
-    } catch (error) { toast.error("System connection failure."); } 
-    finally { setLoading(false); }
+    } catch (error: any) { 
+      toast.error(error.message || "System connection failure."); 
+    } finally { 
+      setLoading(false); 
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -66,18 +68,17 @@ const ProjectManager = () => {
     if (file) data.append('image', file);
 
     try {
-      const url = isEditing && currentId ? `${API_URL}/projects/${currentId}` : `${API_URL}/projects`;
-      const response = await fetch(url, {
-        method: isEditing ? 'PUT' : 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: data,
-      });
-      if (response.ok) {
-        toast.success(`Node ${isEditing ? 'recalibrated' : 'synchronized'} successfully!`);
-        resetForm();
-        fetchProjects();
-      } else { toast.error("Database rejection."); }
-    } catch { toast.error("Network instability."); }
+      if (isEditing && currentId) {
+        await updateProject(currentId, data);
+      } else {
+        await createProject(data);
+      }
+      toast.success(`Node ${isEditing ? 'recalibrated' : 'synchronized'} successfully!`);
+      resetForm();
+      fetchProjects();
+    } catch (err: any) { 
+      toast.error(err.message || "Database rejection."); 
+    }
   };
 
   const editProject = (project: Project) => {
@@ -93,14 +94,15 @@ const ProjectManager = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const deleteProject = async (id: string) => {
+  const handleDeleteProject = async (id: string) => {
     if (!window.confirm("Verify archival termination?")) return;
     try {
-      const res = await fetch(`${API_URL}/projects/${id}`, {
-        method: 'DELETE', headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` },
-      });
-      if (res.ok) { toast.success("Node purged."); fetchProjects(); }
-    } catch { toast.error("Operation failed."); }
+      await deleteProject(id);
+      toast.success("Node purged."); 
+      fetchProjects();
+    } catch (e: any) { 
+      toast.error(e.message || "Operation failed."); 
+    }
   };
 
   const resetForm = () => {
@@ -213,7 +215,7 @@ const ProjectManager = () => {
                              <Button variant="ghost" onClick={() => editProject(p)} className="flex-1 h-12 bg-slate-50 hover:bg-primary/5 text-primary rounded-xl font-black uppercase tracking-widest text-[10px] transition-all border border-border">
                                <Edit size={14} className="mr-2"/> Recalibrate
                              </Button>
-                             <Button variant="ghost" onClick={() => deleteProject(p._id)} className="h-12 w-12 bg-rose-50/50 hover:bg-rose-50 text-rose-500 rounded-xl border border-rose-100 transition-all">
+                             <Button variant="ghost" onClick={() => handleDeleteProject(p._id)} className="h-12 w-12 bg-rose-50/50 hover:bg-rose-50 text-rose-500 rounded-xl border border-rose-100 transition-all">
                                <Trash2 size={16} />
                              </Button>
                           </div>

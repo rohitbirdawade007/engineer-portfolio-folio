@@ -18,7 +18,7 @@ const AboutSection = () => {
   const profile = apiProfile || FALLBACK_PROFILE;
   const educations = apiEducations.length > 0 ? apiEducations : FALLBACK_EDUCATION;
 
-  const photoUrl = profile?.photo || "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png";
+  const photoUrl = profile?.profileImage || profile?.photo || "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png";
 
   return (
     <section id="about" className="py-20 bg-gray-50">

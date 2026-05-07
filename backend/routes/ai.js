@@ -39,7 +39,7 @@ router.post('/chat', async (req, res) => {
       Contact: ${profile?.email}
 
       PROJECTS:
-      ${projects.map(p => `- ${p.title}: ${p.description} (Tech: ${p.techStack.join(', ')})`).join('\n')}
+      ${projects.map(p => `- ${p.title}: ${p.description} (Tech: ${(p.tags || p.techStack || []).join(', ')})`).join('\n')}
 
       SKILLS:
       ${skills.map(s => `- ${s.name}: ${s.description}`).join('\n')}
@@ -58,11 +58,13 @@ router.post('/chat', async (req, res) => {
     `;
 
     // 3. Prepare Chat
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ 
+      model: "gemini-1.5-flash",
+      systemInstruction: systemPrompt
+    });
+
     const chat = model.startChat({
       history: [
-        { role: "user", parts: [{ text: "Hello! Who are you and who is this portfolio for?" }] },
-        { role: "model", parts: [{ text: `Hi! I'm an AI assistant here to help you explore ${profile?.name || "Rohit"}'s work. He's a specialized ${profile?.title || "AI & ML Engineer"}. What would you like to know about his projects or skills?` }] },
         ...(history || []).map(m => ({
             role: m.role === 'ai' ? 'model' : 'user',
             parts: [{ text: m.text }]
@@ -73,8 +75,8 @@ router.post('/chat', async (req, res) => {
       },
     });
 
-    // 4. Send Message with system context (concatenated for flash models if system instruction is not directly used)
-    const result = await chat.sendMessage(`CONTEXT: ${systemPrompt}\n\nUSER QUESTION: ${message}`);
+    // 4. Send Message
+    const result = await chat.sendMessage(message);
     const response = await result.response;
     const text = response.text();
 
@@ -90,12 +92,14 @@ router.post('/chat', async (req, res) => {
 router.post('/predict-diet', async (req, res) => {
   const { spawn } = require('child_process');
   const path = require('path');
+  const os = require('os');
   
   try {
     const inputData = req.body;
+    const pythonCmd = os.platform() === 'win32' ? 'python' : 'python3';
     
     // Spawn Python process
-    const pythonProcess = spawn('python3', [
+    const pythonProcess = spawn(pythonCmd, [
       path.join(__dirname, '../ml/predict.py')
     ]);
 

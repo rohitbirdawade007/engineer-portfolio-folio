@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     res.json(achievements);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -34,7 +34,7 @@ router.get('/:id', async (req, res) => {
     res.json(achievement);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -49,8 +49,12 @@ router.post('/', [auth, upload.array('images', 5)], async (req, res) => {
     if (req.files && req.files.length > 0) {
       data.images = req.files.map(file => `/uploads/${file.filename}`);
     } else if (req.body.image) {
-      // Compatibility for single image field
       data.images = [req.body.image];
+    }
+
+    // Parse highlights if stringified
+    if (typeof data.highlights === 'string') {
+      try { data.highlights = JSON.parse(data.highlights); } catch (e) {}
     }
 
     const achievement = new Achievement(data);
@@ -58,7 +62,7 @@ router.post('/', [auth, upload.array('images', 5)], async (req, res) => {
     res.json(achievement);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -69,20 +73,33 @@ router.put('/:id', [auth, upload.array('images', 5)], async (req, res) => {
   try {
     const data = { ...req.body };
     
+    // Safety: Remove fields that shouldn't be updated via body
+    delete data._id;
+    delete data.__v;
+    delete data.createdAt;
+    delete data.updatedAt;
+    
     // Handle newly uploaded files
     if (req.files && req.files.length > 0) {
       const newImages = req.files.map(file => `/uploads/${file.filename}`);
-      // Append or replace? Let's replace for simplicity or append if they want more.
-      // Most users expect replace when uploading new ones in a simple manager.
       data.images = newImages;
+    } else {
+      // If no new files, don't let req.body.images overwrite existing ones
+      // unless it's explicitly sent as a valid array (e.g. for reordering)
+      delete data.images;
     }
 
-    const achievement = await Achievement.findByIdAndUpdate(req.params.id, data, { new: true });
+    // Parse highlights if stringified
+    if (typeof data.highlights === 'string') {
+      try { data.highlights = JSON.parse(data.highlights); } catch (e) {}
+    }
+
+    const achievement = await Achievement.findByIdAndUpdate(req.params.id, data, { new: true, runValidators: true });
     if (!achievement) return res.status(404).json({ msg: 'Achievement not found' });
     res.json(achievement);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -95,7 +112,7 @@ router.delete('/:id', auth, async (req, res) => {
     res.json({ msg: 'Achievement removed' });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 

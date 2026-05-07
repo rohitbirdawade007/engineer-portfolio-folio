@@ -46,7 +46,7 @@ const ProjectDetailPage = () => {
   }
 
   const imageUrl = project.image ? getAssetUrl(project.image) : null;
-  const techStack = Array.isArray(project.techStack) ? project.techStack : (project.technologies || []);
+  const techStack = Array.isArray(project.techStack) ? project.techStack : (project.tags || project.technologies || []);
 
   return (
     <div className="min-h-screen bg-background pb-20">

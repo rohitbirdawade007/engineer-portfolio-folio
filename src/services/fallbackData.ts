@@ -5,7 +5,7 @@ export const FALLBACK_PROJECTS = [
     title: "Plant Disease Classification using DenseNet",
     description: "A deep learning application that uses DenseNet201 architecture to classify plant diseases from leaf images with high accuracy.",
     image: "/lovable-uploads/b0553c44-91c8-4afd-ab90-bcf2be286fa9.png",
-    technologies: ["Deep Learning", "Keras", "TensorFlow", "DenseNet201"],
+    tags: ["Deep Learning", "Keras", "TensorFlow", "DenseNet201"],
     internalLink: "/projects/plant-disease",
     githubUrl: "https://github.com/rohitbirdawade007"
   },
@@ -165,7 +165,7 @@ export const FALLBACK_PROFILE = {
   title: "Aspiring AI & ML Engineer",
   tagline: "Computer Science Engineer with a passion for AI and ML",
   bio: "Highly motivated and results-driven Computer Science Engineer with a strong foundation in software development, data analytics, and deep learning models. Proficient in designing and implementing advanced algorithms, with practical experience in hydroponic farming projects integrating aquaponics and poultry systems.\n\nDemonstrated ability to work collaboratively on interdisciplinary projects and deliver innovative solutions. Proven internship experience in Data Analytics, showcasing strong analytical and problem-solving skills. Committed to continuous learning and applying cutting-edge technologies to solve real-world problems.",
-  photo: "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png",
+  profileImage: "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png",
   skillsSnippet: "AI & ML",
   heroDescription: "I'm an aspiring AI & ML engineer with a background in Computer Science Engineering from Baramati, Pune. Passionate about creating intelligent solutions that solve real-world problems.",
   linkedin: "https://www.linkedin.com/in/rohit-birdawade-0b4865238/",

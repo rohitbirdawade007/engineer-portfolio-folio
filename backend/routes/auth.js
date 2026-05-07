@@ -37,7 +37,7 @@ router.post('/login', asyncHandler(async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: '12h' },
     (err, token) => {
-      if (err) throw err;
+      if (err) return next(err);
       logger.info(`Successful login: ${username} [${req.ip}]`);
       res.json({ success: true, token });
     }

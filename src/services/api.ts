@@ -1,5 +1,10 @@
-export const API_URL = "/api";
-export const BASE_URL = API_URL.replace('/api', '');
+export const API_URL = import.meta.env.VITE_API_URL || "/api";
+
+// If API_URL is a full URL (like http://localhost:5000/api), BASE_URL should be http://localhost:5000
+// If API_URL is relative (like /api), BASE_URL should be empty
+export const BASE_URL = API_URL.includes('://') 
+  ? API_URL.split('/api')[0] 
+  : "";
 
 /**
  * Resolves an asset path to a full URL.
@@ -11,10 +16,12 @@ export const BASE_URL = API_URL.replace('/api', '');
 export const getAssetUrl = (path: string) => {
   if (!path) return '';
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  
   // Backend-stored files typically live under /uploads/
-  if (path.includes('/uploads/') || path.includes('/api/')) {
+  if (path.startsWith('/uploads/') || path.includes('/api/')) {
     return `${BASE_URL}${path}`;
   }
+  
   // Local public-folder file (e.g., /profile.png) — serve from origin
   return path;
 };
@@ -37,13 +44,26 @@ export const apiFetch = async (endpoint: string, options?: RequestInit) => {
 
 // ─── Authenticated fetcher (admin) ────────────────────────────────────────────
 export const apiAuthFetch = async (endpoint: string, options: RequestInit = {}) => {
+  const isFormData = options.body instanceof FormData;
+  
+  const headers: Record<string, string> = {
+    ...getAuthHeader(),
+    ...((options.headers as Record<string, string>) || {})
+  };
+
+  if (!isFormData && !headers['Content-Type']) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  let body = options.body;
+  if (!isFormData && body && typeof body === 'object') {
+    body = JSON.stringify(body);
+  }
+
   return apiFetch(endpoint, {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...getAuthHeader(),
-      ...((options.headers as Record<string, string>) || {})
-    }
+    headers,
+    body
   });
 };
 
@@ -51,59 +71,59 @@ export const apiAuthFetch = async (endpoint: string, options: RequestInit = {}) 
 export const getProjects = () => apiFetch('/projects');
 export const getProject  = (id: string) => apiFetch(`/projects/${id}`);
 export const createProject = (data: FormData) =>
-  apiFetch('/projects', { method: 'POST', headers: getAuthHeader(), body: data });
+  apiAuthFetch('/projects', { method: 'POST', body: data });
 export const updateProject = (id: string, data: FormData) =>
-  apiFetch(`/projects/${id}`, { method: 'PUT', headers: getAuthHeader(), body: data });
+  apiAuthFetch(`/projects/${id}`, { method: 'PUT', body: data });
 export const deleteProject = (id: string) =>
   apiAuthFetch(`/projects/${id}`, { method: 'DELETE' });
 
 // ─── Achievements ─────────────────────────────────────────────────────────────
 export const getAchievements = () => apiFetch('/achievements');
 export const getAchievement  = (id: string) => apiFetch(`/achievements/${id}`);
-export const createAchievement = (data: object) =>
-  apiAuthFetch('/achievements', { method: 'POST', body: JSON.stringify(data) });
-export const updateAchievement = (id: string, data: object) =>
-  apiAuthFetch(`/achievements/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+export const createAchievement = (data: any) =>
+  apiAuthFetch('/achievements', { method: 'POST', body: data });
+export const updateAchievement = (id: string, data: any) =>
+  apiAuthFetch(`/achievements/${id}`, { method: 'PUT', body: data });
 export const deleteAchievement = (id: string) =>
   apiAuthFetch(`/achievements/${id}`, { method: 'DELETE' });
 
 // ─── Experience ───────────────────────────────────────────────────────────────
 export const getExperiences = () => apiFetch('/experience');
 export const getExperience  = (id: string) => apiFetch(`/experience/${id}`);
-export const createExperience = (data: object) =>
-  apiAuthFetch('/experience', { method: 'POST', body: JSON.stringify(data) });
-export const updateExperience = (id: string, data: object) =>
-  apiAuthFetch(`/experience/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+export const createExperience = (data: any) =>
+  apiAuthFetch('/experience', { method: 'POST', body: data });
+export const updateExperience = (id: string, data: any) =>
+  apiAuthFetch(`/experience/${id}`, { method: 'PUT', body: data });
 export const deleteExperience = (id: string) =>
   apiAuthFetch(`/experience/${id}`, { method: 'DELETE' });
 
 // ─── Education ────────────────────────────────────────────────────────────────
 export const getEducations = () => apiFetch('/education');
 export const getEducation  = (id: string) => apiFetch(`/education/${id}`);
-export const createEducation = (data: object) =>
-  apiAuthFetch('/education', { method: 'POST', body: JSON.stringify(data) });
-export const updateEducation = (id: string, data: object) =>
-  apiAuthFetch(`/education/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+export const createEducation = (data: any) =>
+  apiAuthFetch('/education', { method: 'POST', body: data });
+export const updateEducation = (id: string, data: any) =>
+  apiAuthFetch(`/education/${id}`, { method: 'PUT', body: data });
 export const deleteEducation = (id: string) =>
   apiAuthFetch(`/education/${id}`, { method: 'DELETE' });
 
 // ─── Research ─────────────────────────────────────────────────────────────────
 export const getResearchList = () => apiFetch('/research');
 export const getResearchItem = (id: string) => apiFetch(`/research/${id}`);
-export const createResearch  = (data: object) =>
-  apiAuthFetch('/research', { method: 'POST', body: JSON.stringify(data) });
-export const updateResearch  = (id: string, data: object) =>
-  apiAuthFetch(`/research/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+export const createResearch  = (data: any) =>
+  apiAuthFetch('/research', { method: 'POST', body: data });
+export const updateResearch  = (id: string, data: any) =>
+  apiAuthFetch(`/research/${id}`, { method: 'PUT', body: data });
 export const deleteResearch  = (id: string) =>
   apiAuthFetch(`/research/${id}`, { method: 'DELETE' });
 
 // ─── Certifications ───────────────────────────────────────────────────────────
 export const getCertifications  = () => apiFetch('/certifications');
 export const getCertification   = (id: string) => apiFetch(`/certifications/${id}`);
-export const createCertification = (data: object) =>
-  apiAuthFetch('/certifications', { method: 'POST', body: JSON.stringify(data) });
-export const updateCertification = (id: string, data: object) =>
-  apiAuthFetch(`/certifications/${id}`, { method: 'PUT', body: JSON.stringify(data) });
+export const createCertification = (data: any) =>
+  apiAuthFetch('/certifications', { method: 'POST', body: data });
+export const updateCertification = (id: string, data: any) =>
+  apiAuthFetch(`/certifications/${id}`, { method: 'PUT', body: data });
 export const deleteCertification = (id: string) =>
   apiAuthFetch(`/certifications/${id}`, { method: 'DELETE' });
 
@@ -147,8 +167,8 @@ export const predictDiet = (data: any) =>
 
 // ─── Profile System ──────────────────────────────────────────────────────────
 export const getProfile = () => apiFetch('/profile');
-export const updateProfile = (data: object) =>
-  apiAuthFetch('/profile', { method: 'PUT', body: JSON.stringify(data) });
+export const updateProfile = (data: any) =>
+  apiAuthFetch('/profile', { method: 'PUT', body: data });
 export const uploadProfileImage = (file: File) => {
   const formData = new FormData();
   formData.append('image', file);

@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
     res.json(experiences);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
     res.json(experience);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -46,7 +46,7 @@ router.post('/', auth, async (req, res) => {
     res.json(experience);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -60,7 +60,7 @@ router.put('/:id', auth, async (req, res) => {
     res.json(experience);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 
@@ -73,7 +73,7 @@ router.delete('/:id', auth, async (req, res) => {
     res.json({ msg: 'Experience removed' });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ success: false, message: 'Server Error', error: err.message });
   }
 });
 

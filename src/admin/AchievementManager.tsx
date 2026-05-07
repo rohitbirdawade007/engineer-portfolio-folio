@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getAchievements, API_URL, getAssetUrl } from '@/services/api';
+import { getAchievements, createAchievement, updateAchievement, deleteAchievement, getAssetUrl } from '@/services/api';
 import { Plus, Pencil, Trash2, X, Save, Trophy, Medal, Target, Star, ArrowUpRight, Image as ImageIcon, Upload } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +24,8 @@ interface Achievement {
 
 const EMPTY: Achievement = {
   title: '', organization: '', date: '', category: 'achievements',
-  type: 'award', description: '', fullDescription: '', slug: ''
+  type: 'award', description: '', fullDescription: '', slug: '',
+  highlights: []
 };
 
 const AchievementManager = () => {
@@ -74,27 +75,28 @@ const AchievementManager = () => {
         data.append('images', files[i]);
       }
     }
+    
+    // Append highlights as JSON string or multiple fields
+    if (form.highlights && form.highlights.length > 0) {
+      data.append('highlights', JSON.stringify(form.highlights));
+    }
 
     try {
-      const url = editing ? `${API_URL}/achievements/${editing}` : `${API_URL}/achievements`;
-      const response = await fetch(url, {
-        method: editing ? 'PUT' : 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
-        body: data,
-      });
-
-      if (response.ok) {
-        setShowForm(false);
-        setEditing(null);
-        setForm(EMPTY);
-        setFiles(null);
-        load();
-        toast.success(editing ? "Node recalibrated successfully" : "Achievement synchronized successfully");
+      if (editing) {
+        await updateAchievement(editing, data);
       } else {
-        toast.error('Database rejection');
+        await createAchievement(data);
       }
-    } catch (err) {
-      toast.error('System synchronization failure');
+
+      setShowForm(false);
+      setEditing(null);
+      setForm(EMPTY);
+      setFiles(null);
+      load();
+      toast.success(editing ? "Node recalibrated successfully" : "Achievement synchronized successfully");
+    } catch (err: any) {
+      toast.error(err.message || 'Database rejection');
+      console.error('Submit error:', err);
     } finally {
       setSaving(false);
     }
@@ -109,17 +111,11 @@ const AchievementManager = () => {
   const handleDelete = async (id: string) => {
     if (!confirm('Proceed with data deletion?')) return;
     try {
-      const token = localStorage.getItem('adminToken');
-      const res = await fetch(`${API_URL}/achievements/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (res.ok) {
-        toast.success("Achievement purged");
-        load();
-      }
-    } catch (e) {
-      toast.error("Cleanup failure");
+      await deleteAchievement(id);
+      toast.success("Achievement purged");
+      load();
+    } catch (e: any) {
+      toast.error(e.message || "Cleanup failure");
     }
   };
 
@@ -214,6 +210,16 @@ const AchievementManager = () => {
                     <div className="md:col-span-2 space-y-3">
                       <Label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Full Technical Log</Label>
                       <Textarea name="fullDescription" value={form.fullDescription} onChange={handleChange} className="min-h-[120px] bg-slate-50/50 border-border rounded-2xl font-medium" />
+                    </div>
+
+                    <div className="md:col-span-2 space-y-3">
+                      <Label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground ml-1">Key Highlights (Comma separated)</Label>
+                      <Input 
+                        value={Array.isArray(form.highlights) ? form.highlights.join(', ') : ''} 
+                        onChange={(e) => setForm({...form, highlights: e.target.value.split(',').map(s => s.trim()).filter(Boolean)})} 
+                        className="h-14 bg-slate-50/50 border-border rounded-2xl font-bold" 
+                        placeholder="Highlight 1, Highlight 2..." 
+                      />
                     </div>
 
                     <div className="md:col-span-2 pt-4">

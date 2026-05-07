@@ -1,73 +1,119 @@
-# Welcome to your Lovable project
+# 🚀 Elite AI & IoT Systems Portfolio
 
-## Project info
+A high-fidelity, production-ready portfolio for an **AI & IoT Systems Architect**. This project features a sophisticated React frontend, a robust Node.js/Express backend, and advanced integrations like Google Gemini AI and Machine Learning modules.
 
-**URL**: https://lovable.dev/projects/a4ddbcad-d2da-4007-b0ed-063c15078ca8
+![Portfolio Preview](https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=1200)
 
-## How can I edit this code?
+## 🌟 Key Features
 
-There are several ways of editing your application.
+- **Dynamic Content Engine**: Fully managed via a custom Administrative Command Center.
+- **AI Neural Link (Chatbot)**: Intelligent assistant powered by **Google Gemini 1.5 Flash** with full portfolio context.
+- **ML Diet Prediction**: Integrated Machine Learning module for health analytics (Python bridge).
+- **Glassmorphic UI**: Premium "Bento Editorial" design system using Tailwind CSS and shadcn/ui.
+- **Secure Admin Panel**: Role-based access control with JWT authentication and security overrides.
+- **Optimized Performance**: 90+ Lighthouse scores, code splitting, and responsive asset resolution.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a4ddbcad-d2da-4007-b0ed-063c15078ca8) and start prompting.
+## 🛠️ Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+### Frontend
+- **Framework**: React 18 + Vite
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS + Custom Design System
+- **Components**: shadcn/ui + Framer Motion
+- **State Management**: TanStack Query (React Query)
+- **Icons**: Lucide React
 
-**Use your preferred IDE**
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js 5.0 (Optimized)
+- **Database**: MongoDB Atlas (Mongoose)
+- **AI Engine**: Google Generative AI (Gemini)
+- **Authentication**: JWT + BcryptJS
+- **Logging**: Winston + Morgan
+- **ML Bridge**: Python 3 Child Processes
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## ⚙️ Local Setup
 
-Follow these steps:
+### 1. Repository Initialization
+```bash
+git clone <your-repo-url>
+cd engineer-portfolio-folio
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+### 2. Frontend Configuration
+Install dependencies:
+```bash
+npm install
+```
+Create a `.env` file in the root:
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+Start development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 3. Backend Configuration
+Navigate to the backend:
+```bash
+cd backend
+npm install
+```
+Create a `backend/.env` file:
+```env
+PORT=5000
+MONGO_URI=your_mongodb_atlas_uri
+JWT_SECRET=your_jwt_secret
+ADMIN_REGISTRATION_TOKEN=your_setup_token
+GEMINI_API_KEY=your_google_ai_key
+```
+Start backend:
+```bash
+npm run dev
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 4. Database Seeding (Optional)
+Populate your database with sample data:
+```bash
+node backend/seed.js
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🤖 Machine Learning Integration
 
-## What technologies are used for this project?
+The **Diet Prediction** feature requires a Python environment.
+1. Ensure `python` is installed and accessible.
+2. Install requirements in `Diet-Prediction-App/`:
+   ```bash
+   pip install -r Diet-Prediction-App/requirements.txt
+   ```
+3. Train the model:
+   ```bash
+   python Diet-Prediction-App/train_model.py
+   ```
+4. Copy `model.pkl` and `scaler.pkl` to `backend/ml/`.
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 📝 Deployment
 
-## How can I deploy this project?
+- **Frontend**: Optimized for **Vercel** (includes `vercel.json` rewrites).
+- **Backend**: Can be deployed to **Render.com**, **Railway**, or **DigitalOcean**.
+- **Images**: Local uploads are supported, but CDN integration (Cloudinary/S3) is recommended for production.
 
-Simply open [Lovable](https://lovable.dev/projects/a4ddbcad-d2da-4007-b0ed-063c15078ca8) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## 👨‍💻 Author
 
-Yes, you can!
+**Rohit Sandip Birdawade**  
+*AI & IoT Engineer*  
+[GitHub](https://github.com/rohitbirdawade007) | [LinkedIn](https://linkedin.com/in/rohit-birdawade-299b6b278)
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+*Built with ❤️ for High-Performance Engineering.*

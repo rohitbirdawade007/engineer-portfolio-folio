@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProjects, getAssetUrl } from "@/services/api";
 import { FALLBACK_PROJECTS } from "@/services/fallbackData";
-import { getProjects, getAssetUrl } from "@/services/api";
-import { FALLBACK_PROJECTS } from "@/services/fallbackData";
 import { CardSkeleton } from "./ui/skeleton";
 
 const ProjectsSection = () => {

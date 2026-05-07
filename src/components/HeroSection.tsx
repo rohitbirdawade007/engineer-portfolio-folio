@@ -20,7 +20,7 @@ const HeroSection = () => {
     }
   };
   
-  const photoUrl = profile?.photo || "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png";
+  const photoUrl = profile?.profileImage || profile?.photo || "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png";
   const name = profile?.name || "Rohit Sandip Birdawade";
   
   return (
@@ -29,6 +29,28 @@ const HeroSection = () => {
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 left-1/5 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"></div>
+        
+        {/* Rolling Coin Path (Reference Inspired) */}
+        <div className="absolute bottom-[20%] right-[10%] w-[40%] h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent rotate-[-15deg] opacity-50"></div>
+        
+        {/* Animated 3D Coin 1 */}
+        <div className="absolute bottom-[22%] right-[15%] w-32 h-32 animate-float-path pointer-events-none">
+          <img 
+            src="/tech-coin.png" 
+            alt="3D Coin" 
+            className="w-full h-full object-contain animate-coin drop-shadow-2xl"
+          />
+        </div>
+        
+        {/* Animated 3D Coin 2 (Delayed) */}
+        <div className="absolute bottom-[22%] right-[15%] w-32 h-32 animate-float-path pointer-events-none" style={{ animationDelay: '4s' }}>
+          <img 
+            src="/tech-coin.png" 
+            alt="3D Coin" 
+            className="w-full h-full object-contain animate-coin drop-shadow-2xl"
+            style={{ animationDuration: '6s' }}
+          />
+        </div>
       </div>
       
       <div className="container mx-auto px-4 py-20">
