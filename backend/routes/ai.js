@@ -85,4 +85,54 @@ router.post('/chat', async (req, res) => {
   }
 });
 
+// @route   POST api/ai/predict-diet
+// @desc    Run ML model prediction via Python bridge
+router.post('/predict-diet', async (req, res) => {
+  const { spawn } = require('child_process');
+  const path = require('path');
+  
+  try {
+    const inputData = req.body;
+    
+    // Spawn Python process
+    const pythonProcess = spawn('python3', [
+      path.join(__dirname, '../ml/predict.py')
+    ]);
+
+    let dataString = '';
+    let errorString = '';
+
+    // Write input to stdin
+    pythonProcess.stdin.write(JSON.stringify(inputData));
+    pythonProcess.stdin.end();
+
+    // Collect data from stdout
+    pythonProcess.stdout.on('data', (data) => {
+      dataString += data.toString();
+    });
+
+    // Collect data from stderr
+    pythonProcess.stderr.on('data', (data) => {
+      errorString += data.toString();
+    });
+
+    pythonProcess.on('close', (code) => {
+      if (code !== 0) {
+        console.error('Python Error Stderr:', errorString);
+        return res.status(500).json({ success: false, msg: 'ML Processing Error', error: errorString });
+      }
+      
+      try {
+        const result = JSON.parse(dataString);
+        res.json(result);
+      } catch (e) {
+        res.status(500).json({ success: false, msg: 'Failed to parse ML output', raw: dataString });
+      }
+    });
+
+  } catch (err) {
+    res.status(500).json({ success: false, msg: 'Server Error during ML inference' });
+  }
+});
+
 module.exports = router;

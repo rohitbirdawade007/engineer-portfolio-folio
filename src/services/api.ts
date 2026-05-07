@@ -138,6 +138,13 @@ export const resetAdminPassword = (data: { username: string; newPassword: string
     body: JSON.stringify(data)
   });
 
+export const predictDiet = (data: any) =>
+  apiFetch('/ai/predict-diet', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
 // ─── Profile System ──────────────────────────────────────────────────────────
 export const getProfile = () => apiFetch('/profile');
 export const updateProfile = (data: object) =>

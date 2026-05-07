@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Code, Database, BrainCircuit, BarChart3, Activity, HeartPulse, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
+import { API_URL, predictDiet } from '@/services/api';
 
 const DietPredictionPage = () => {
   const [formData, setFormData] = useState({
@@ -19,18 +20,32 @@ const DietPredictionPage = () => {
   const [prediction, setPrediction] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handlePredict = (e: React.FormEvent) => {
+  const handlePredict = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setPrediction(null);
 
-    // Simulate ML Inference
-    setTimeout(() => {
-      const diets = ["High Protein Diet", "Keto Diet", "Balanced Mediterranean", "Low Carb Diet", "Plant-Based Diet"];
-      setPrediction(diets[Math.floor(Math.random() * diets.length)]);
+    try {
+      const result = await predictDiet({
+        age: parseInt(formData.age),
+        gender: formData.gender === 'Male' ? 1 : 0,
+        height: parseFloat(formData.height),
+        weight: parseFloat(formData.weight),
+        bmi: parseFloat(formData.weight) / ((parseFloat(formData.height) / 100) ** 2),
+        activity: formData.activity === 'Low' ? 0 : formData.activity === 'Medium' ? 1 : 2
+      });
+
+      if (result.success) {
+        setPrediction(result.prediction);
+        toast.success("Diet Recommendation Generated!");
+      } else {
+        toast.error(result.error || "ML Processing Error");
+      }
+    } catch (error) {
+      toast.error("Network error. Is the ML backend online?");
+    } finally {
       setLoading(false);
-      toast.success("Diet Recommendation Generated!");
-    }, 1500);
+    }
   };
 
   return (
@@ -147,11 +162,19 @@ const DietPredictionPage = () => {
                   <form onSubmit={handlePredict} className="space-y-4">
                     <div className="space-y-2">
                       <Label className="text-xs">Age</Label>
-                      <Input type="number" defaultValue="25" className="bg-muted/50" />
+                      <Input 
+                        type="number" 
+                        value={formData.age} 
+                        onChange={(e) => setFormData({...formData, age: e.target.value})}
+                        className="bg-muted/50" 
+                      />
                     </div>
                     <div className="space-y-2">
                       <Label className="text-xs">Activity Level</Label>
-                      <Select defaultValue="Medium">
+                      <Select 
+                        value={formData.activity} 
+                        onValueChange={(val) => setFormData({...formData, activity: val})}
+                      >
                         <SelectTrigger className="bg-muted/50">
                           <SelectValue />
                         </SelectTrigger>
@@ -165,11 +188,21 @@ const DietPredictionPage = () => {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label className="text-xs">Weight (kg)</Label>
-                        <Input type="number" defaultValue="70" className="bg-muted/50" />
+                        <Input 
+                          type="number" 
+                          value={formData.weight} 
+                          onChange={(e) => setFormData({...formData, weight: e.target.value})}
+                          className="bg-muted/50" 
+                        />
                       </div>
                       <div className="space-y-2">
                         <Label className="text-xs">Height (cm)</Label>
-                        <Input type="number" defaultValue="170" className="bg-muted/50" />
+                        <Input 
+                          type="number" 
+                          value={formData.height} 
+                          onChange={(e) => setFormData({...formData, height: e.target.value})}
+                          className="bg-muted/50" 
+                        />
                       </div>
                     </div>
                     <Button 
