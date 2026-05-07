@@ -1,5 +1,6 @@
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Lock } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -52,6 +53,10 @@ const Footer = () => {
             <a href="#projects" className="hover:text-white transition-colors">Projects</a>
             <a href="#skills" className="hover:text-white transition-colors">Skills</a>
             <a href="#contact" className="hover:text-white transition-colors">Contact</a>
+            <Link to="/admin/login" className="flex items-center gap-1 hover:text-white transition-colors opacity-60 hover:opacity-100">
+              <Lock size={12} />
+              Admin
+            </Link>
           </div>
         </div>
       </div>
