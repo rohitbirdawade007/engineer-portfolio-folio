@@ -24,7 +24,16 @@ import ProjectXpoThirdPrizePage from "./pages/ProjectXpoThirdPrizePage";
 import AchievementDetailPage from "./pages/AchievementDetailPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
 // import ThesisViewerPage from "./pages/ThesisViewerPage";
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // Data remains "fresh" for 5 minutes
+      gcTime: 1000 * 60 * 30,    // Cache remains in memory for 30 minutes
+      retry: 1,                 // Retry once if failed
+      refetchOnWindowFocus: false, // Don't refetch every time user tabs back
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

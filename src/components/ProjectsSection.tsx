@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProjects, getAssetUrl } from "@/services/api";
 import { FALLBACK_PROJECTS } from "@/services/fallbackData";
+import { CardSkeleton } from "./ui/Skeleton";
 
 const ProjectsSection = () => {
   const { data: apiProjects = [], isLoading } = useQuery({
@@ -26,8 +27,10 @@ const ProjectsSection = () => {
         </p>
 
         {isLoading ? (
-          <div className="flex justify-center my-20">
-            <Loader2 className="animate-spin text-primary w-10 h-10" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+            {[1, 2, 3, 4].map((i) => (
+              <CardSkeleton key={i} />
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">

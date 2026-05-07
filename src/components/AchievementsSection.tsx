@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getAchievements } from "@/services/api";
 import { FALLBACK_ACHIEVEMENTS } from "@/services/fallbackData";
+import { CardSkeleton } from "./ui/Skeleton";
 
 const AchievementsSection = () => {
   const navigate = useNavigate();
@@ -53,7 +54,11 @@ const AchievementsSection = () => {
         <h2 className="section-heading mx-auto text-center mb-12">Achievements & Recognition</h2>
         
         {isLoading ? (
-          <div className="flex justify-center py-20"><Loader2 className="animate-spin text-primary w-10 h-10" /></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <CardSkeleton key={i} />
+            ))}
+          </div>
         ) : (
           <>
             {/* Achievements & Awards */}
