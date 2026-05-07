@@ -1,4 +1,7 @@
-export const API_URL = import.meta.env.VITE_API_URL || "/api";
+const rawApiUrl = import.meta.env.VITE_API_URL || "/api";
+export const API_URL = (rawApiUrl.startsWith('http') && !rawApiUrl.includes('/api')) 
+  ? (rawApiUrl.endsWith('/') ? `${rawApiUrl}api` : `${rawApiUrl}/api`) 
+  : rawApiUrl;
 
 // If API_URL is a full URL (like http://localhost:5000/api), BASE_URL should be http://localhost:5000
 // If API_URL is relative (like /api), BASE_URL should be empty
