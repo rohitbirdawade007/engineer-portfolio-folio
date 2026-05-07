@@ -23,6 +23,7 @@ import NCRISTResearchPaperPage from "./pages/NCRISTResearchPaperPage";
 import ProjectXpoThirdPrizePage from "./pages/ProjectXpoThirdPrizePage";
 import AchievementDetailPage from "./pages/AchievementDetailPage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
+import DietPredictionPage from "./pages/DietPredictionPage";
 // import ThesisViewerPage from "./pages/ThesisViewerPage";
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,7 @@ const App = () => (
           <Route path="/projects/plant-disease" element={<ProjectDetailPage />} />
           <Route path="/projects/retinopathy" element={<ProjectDetailPage />} />
           <Route path="/projects/smart-agriculture" element={<ProjectDetailPage />} />
+          <Route path="/projects/diet-prediction" element={<DietPredictionPage />} />
           <Route path="/awards/student-of-computer-department" element={<AchievementDetailPage />} />
           <Route path="/awards/excellence-of-the-year" element={<AchievementDetailPage />} />
           <Route path="/achievements/student-of-computer-department" element={<AchievementDetailPage />} />
