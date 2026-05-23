@@ -22,9 +22,12 @@ const ExperienceSection = () => {
   return (
     <div>
       {/* Internships & Experience Section */}
-      <section id="experience" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="section-heading mx-auto text-center mb-12">Internships & Experience</h2>
+      <section id="experience" className="py-24 border-b border-foreground/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <span className="eyebrow mb-4 block">Section 04 — Practice</span>
+            <h2 className="section-heading italic">Internships &amp; <span className="not-italic">Experience</span></h2>
+          </div>
           
           <div className="max-w-4xl mx-auto">
             {loadingExp ? (
@@ -76,9 +79,12 @@ const ExperienceSection = () => {
       </section>
 
       {/* Publications & Research Work Section */}
-      <section id="publications" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="section-heading mx-auto text-center mb-12">Publications & Research Work</h2>
+      <section id="publications" className="py-24 bg-muted/30 border-b border-foreground/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-16">
+            <span className="eyebrow mb-4 block">Section 04b — Research</span>
+            <h2 className="section-heading italic">Publications</h2>
+          </div>
           
           <div className="max-w-4xl mx-auto">
             {loadingRes ? (

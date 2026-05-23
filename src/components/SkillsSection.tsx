@@ -78,7 +78,7 @@ const SkillsSection = () => {
         </div>
         
         <div className="mt-16">
-          <h3 className="text-2xl font-bold text-center mb-8">Certifications</h3>
+          <h3 className="font-serif text-4xl italic mb-10">Certifications</h3>
           {loadingCerts ? (
             <div className="flex justify-center"><Loader2 className="animate-spin text-primary" /></div>
           ) : (
@@ -98,7 +98,7 @@ const SkillsSection = () => {
         </div>
         
         <div className="mt-16">
-          <h3 className="text-2xl font-bold text-center mb-8">Technical Stack</h3>
+          <h3 className="font-serif text-4xl italic mb-10">Technical Stack</h3>
           <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
             {(skills || []).map((skill: any, index: number) => (
               <Badge key={skill._id || index} className="skill-pill text-base py-1.5 px-3 bg-white text-primary border border-primary/20 hover:bg-primary/5">
