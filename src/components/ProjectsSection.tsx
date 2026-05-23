@@ -26,13 +26,15 @@ const ProjectsSection = () => {
   const projects = combinedProjects.length > 0 ? combinedProjects : FALLBACK_PROJECTS;
 
   return (
-    <section id="projects" className="py-20">
-      <div className="container mx-auto px-4">
-        <h2 className="section-heading mx-auto text-center mb-12">My Projects</h2>
-        
-        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-          Here are some of the projects I've worked on, showcasing my skills in AI, machine learning, data analytics, and IoT applications.
-        </p>
+    <section id="projects" className="py-24 border-b border-foreground/10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <span className="eyebrow mb-4 block">Section 02 — Portfolio</span>
+            <h2 className="section-heading">Selected <span className="italic text-muted-foreground">Work</span></h2>
+          </div>
+          <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-semibold">Index 01 — 05</span>
+        </div>
 
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">

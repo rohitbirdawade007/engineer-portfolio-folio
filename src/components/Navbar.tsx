@@ -1,7 +1,5 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const Navbar = () => {
@@ -13,46 +11,31 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Update navbar background when scrolled
       setIsScrolled(window.scrollY > 10);
-      
-      // Update active section based on scroll position
       const sections = document.querySelectorAll("section");
       const scrollPosition = window.scrollY + 100;
-      
       sections.forEach((section) => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute("id") || "";
-        
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
           setActiveSection(sectionId);
         }
       });
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
     setMobileMenuOpen(false);
-    
-    // If not on homepage, navigate to homepage first
     if (location.pathname !== "/") {
       navigate(`/#${sectionId}`);
       return;
     }
-    
-    // If on homepage, scroll to section
     const section = document.getElementById(sectionId);
     if (section) {
-      const offset = 80; // Account for navbar height
-      const sectionTop = section.offsetTop - offset;
-      window.scrollTo({
-        top: sectionTop,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: section.offsetTop - 80, behavior: "smooth" });
     }
   };
 
@@ -61,86 +44,72 @@ const Navbar = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "bg-white/90 backdrop-blur-sm shadow-md py-2" : "bg-transparent py-4"
+        "fixed top-0 left-0 w-full z-50 transition-all duration-500",
+        isScrolled ? "bg-background/85 backdrop-blur-md border-b border-foreground/10 py-3" : "bg-transparent py-6"
       )}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <button 
-          onClick={() => scrollToSection("home")} 
-          className="text-xl md:text-2xl font-bold text-gradient cursor-pointer"
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-baseline">
+        <button
+          onClick={() => scrollToSection("home")}
+          className="font-serif text-2xl md:text-3xl italic tracking-tight text-foreground hover:text-secondary transition-colors"
         >
           Rohit.
         </button>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+
+        <nav className="hidden md:flex items-center gap-10">
           {navItems.map((section) => (
             <button
               key={section}
               onClick={() => scrollToSection(section)}
-              className={cn(
-                "nav-link capitalize",
-                activeSection === section ? "text-primary font-medium" : ""
-              )}
+              className={cn("nav-link capitalize", activeSection === section && "active text-secondary")}
             >
               {section}
             </button>
           ))}
-          <Button 
-            variant="default" 
-            className="bg-primary hover:bg-primary/90 text-white"
+          <button
             onClick={() => scrollToSection("contact")}
+            className="ml-2 px-5 py-2 border border-primary text-[10px] uppercase tracking-[0.25em] font-bold hover:bg-primary hover:text-primary-foreground transition-all"
           >
-            Get In Touch
-          </Button>
+            Inquire
+          </button>
         </nav>
-        
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-gray-800" 
+
+        <button
+          className="md:hidden text-foreground"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
         >
           {mobileMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x">
-              <path d="M18 6 6 18"></path>
-              <path d="m6 6 12 12"></path>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu">
-              <line x1="4" x2="20" y1="12" y2="12"></line>
-              <line x1="4" x2="20" y1="6" y2="6"></line>
-              <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="8" y2="8"/><line x1="4" x2="20" y1="16" y2="16"/></svg>
           )}
         </button>
       </div>
-      
-      {/* Mobile Menu */}
+
       <div className={cn(
-        "md:hidden absolute top-full left-0 w-full bg-white shadow-lg transition-all duration-300 overflow-hidden",
-        mobileMenuOpen ? "max-h-screen py-4" : "max-h-0"
+        "md:hidden absolute top-full left-0 w-full bg-background border-b border-foreground/10 transition-all duration-300 overflow-hidden",
+        mobileMenuOpen ? "max-h-screen py-6" : "max-h-0"
       )}>
-        <div className="container mx-auto px-4 flex flex-col space-y-4">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col space-y-4">
           {navItems.map((section) => (
             <button
               key={section}
               onClick={() => scrollToSection(section)}
               className={cn(
-                "py-2 text-left capitalize",
-                activeSection === section ? "text-primary font-medium" : ""
+                "py-2 text-left text-[11px] uppercase tracking-[0.25em] font-semibold",
+                activeSection === section ? "text-secondary" : "text-foreground/80"
               )}
             >
               {section}
             </button>
           ))}
-          <Button 
-            variant="default" 
-            className="bg-primary hover:bg-primary/90 text-white w-full"
+          <button
             onClick={() => scrollToSection("contact")}
+            className="mt-2 py-3 bg-primary text-primary-foreground text-[10px] uppercase tracking-[0.3em] font-bold"
           >
-            Get In Touch
-          </Button>
+            Inquire
+          </button>
         </div>
       </div>
     </header>
