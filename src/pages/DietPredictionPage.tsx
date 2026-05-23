@@ -227,7 +227,7 @@ const DietPredictionPage = () => {
               <div className="bg-muted/30 rounded-2xl p-6 border border-dashed border-border text-center">
                 <p className="text-xs text-muted-foreground mb-4">Want to see the real app live on Streamlit Cloud?</p>
                 <Button variant="outline" className="w-full rounded-xl gap-2" asChild>
-                  <a href="https://share.streamlit.io/" target="_blank" rel="noreferrer">
+                  <a href="https://diet-recommendation-system-q5m7.onrender.com" target="_blank" rel="noreferrer">
                     <ExternalLink size={14} />
                     Launch Real App
                   </a>
