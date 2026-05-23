@@ -74,7 +74,10 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontFamily: {
-				poppins: ['Poppins', 'sans-serif'],
+				poppins: ['Work Sans', 'sans-serif'],
+				sans: ['Work Sans', 'sans-serif'],
+				serif: ['Instrument Serif', 'serif'],
+				display: ['Instrument Serif', 'serif'],
 			},
 		}
 	},
