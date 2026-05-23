@@ -20,6 +20,7 @@ interface Achievement {
   fullDescription: string;
   slug: string;
   images?: string[];
+  highlights?: string[];
 }
 
 const EMPTY: Achievement = {

@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getAchievements } from "@/services/api";
 import { FALLBACK_ACHIEVEMENTS } from "@/services/fallbackData";
-import { getAchievements } from "@/services/api";
-import { FALLBACK_ACHIEVEMENTS } from "@/services/fallbackData";
 import { CardSkeleton } from "./ui/skeleton";
 
 const AchievementsSection = () => {
