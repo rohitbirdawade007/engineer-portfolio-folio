@@ -34,8 +34,8 @@ export const FALLBACK_PROJECTS = [
     image: "https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&fit=crop&q=80&w=800",
     technologies: ["Python", "Scikit-Learn", "Streamlit", "Machine Learning"],
     internalLink: "/projects/diet-prediction",
-    githubUrl: "https://github.com/rohitbirdawade007/Diet-Prediction-App",
-    demoUrl: "https://share.streamlit.io/"
+    githubUrl: "https://github.com/rohitbirdawade007/diet-recommendation-system",
+    demoUrl: "https://diet-recommendation-system-q5m7.onrender.com"
   }
 ];
 
