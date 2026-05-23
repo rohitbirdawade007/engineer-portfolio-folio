@@ -49,9 +49,16 @@ const AchievementsSection = () => {
   };
 
   return (
-    <section id="achievements" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="section-heading mx-auto text-center mb-12">Achievements & Recognition</h2>
+    <section id="achievements" className="py-24 bg-muted/30 border-b border-foreground/10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div>
+            <span className="eyebrow mb-4 block">Section 03 — Recognition</span>
+            <h2 className="section-heading italic">Achievements &amp; <span className="not-italic">Awards</span></h2>
+          </div>
+          <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-semibold">Index — Honours &amp; Distinctions</span>
+        </div>
+
         
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -64,7 +71,7 @@ const AchievementsSection = () => {
             {/* Achievements & Awards */}
             {achievementsByCategory.achievements.length > 0 && (
               <div className="mb-16">
-                <h3 className="text-3xl font-bold text-center mb-8 text-gray-900">🏆 Achievements & Awards</h3>
+                <h3 className="font-serif text-3xl italic mb-8">Honours</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                   {achievementsByCategory.achievements.map((achievement: any) => (
                     <Card 
@@ -104,7 +111,7 @@ const AchievementsSection = () => {
             {/* Co-Curricular Activities */}
             {achievementsByCategory.cocurricular.length > 0 && (
               <div className="mb-16">
-                <h3 className="text-3xl font-bold text-center mb-8 text-gray-900">📚 Co-Curricular Activities</h3>
+                <h3 className="font-serif text-3xl italic mb-8">Co-Curricular</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                   {achievementsByCategory.cocurricular.map((achievement: any) => (
                     <Card 
@@ -139,7 +146,7 @@ const AchievementsSection = () => {
             {/* Extracurricular Activities */}
             {achievementsByCategory.extracurricular.length > 0 && (
               <div>
-                <h3 className="text-3xl font-bold text-center mb-8 text-gray-900">✨ Extracurricular Activities</h3>
+                <h3 className="font-serif text-3xl italic mb-8">Extracurricular</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                   {achievementsByCategory.extracurricular.map((achievement: any) => (
                     <Card 
