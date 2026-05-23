@@ -58,7 +58,7 @@ const DietPredictionPage = () => {
             <span className="font-medium">Back to Portfolio</span>
           </Link>
           <a 
-            href="https://github.com/rohitbirdawade007/Diet-Prediction-App" 
+            href="https://github.com/rohitbirdawade007/diet-recommendation-system" 
             target="_blank" 
             rel="noreferrer"
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
