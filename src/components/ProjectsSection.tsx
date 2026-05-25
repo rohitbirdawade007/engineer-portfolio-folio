@@ -8,12 +8,16 @@ const ProjectsSection = () => {
   const { data: apiProjects = [], isLoading } = useQuery({ queryKey: ['projects'], queryFn: getProjects });
   const { data: profile } = useQuery({ queryKey: ['profile'], queryFn: getProfile });
 
-  const dietProject = FALLBACK_PROJECTS.find(p => p.id === 'diet-prediction');
+  // Merge backend projects with fallback GitHub projects
+  // ensuring we don't duplicate any that might have been manually added to the backend
   const combinedProjects = [...apiProjects];
-  if (dietProject && !apiProjects.find((p: any) => p.slug === 'diet-prediction' || p.id === 'diet-prediction')) {
-    combinedProjects.unshift(dietProject);
-  }
-  const projects = combinedProjects.length > 0 ? combinedProjects : FALLBACK_PROJECTS;
+  FALLBACK_PROJECTS.forEach(fallback => {
+    if (!combinedProjects.find(p => p.slug === fallback.id || p.id === fallback.id || p.githubUrl === fallback.githubUrl)) {
+      combinedProjects.push(fallback);
+    }
+  });
+  
+  const projects = combinedProjects;
 
   return (
     <section id="projects" className="py-24 md:py-32 relative">
