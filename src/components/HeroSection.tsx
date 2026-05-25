@@ -170,6 +170,9 @@ const HeroSection = () => {
                     src={getAssetUrl(photoUrl)}
                     alt={name}
                     className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = '/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png';
+                    }}
                   />
                 )}
                 {/* Gradient overlay at bottom */}
