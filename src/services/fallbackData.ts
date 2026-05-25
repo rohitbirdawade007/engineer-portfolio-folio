@@ -4,7 +4,7 @@ export const FALLBACK_PROJECTS = [
     id: "plant-disease",
     title: "Plant Disease Classification using Deep Learning",
     description: "A deep learning application that uses DenseNet201 architecture to classify plant diseases from leaf images with high accuracy.",
-    image: "/lovable-uploads/b0553c44-91c8-4afd-ab90-bcf2be286fa9.png",
+    image: "https://images.unsplash.com/photo-1530836369250-ef71a3f5e9bf?auto=format&fit=crop&q=80&w=800",
     tags: ["Deep Learning", "Keras", "TensorFlow", "DenseNet201"],
     internalLink: "/projects/plant-disease",
     githubUrl: "https://github.com/rohitbirdawade007/Combined-Plant-Leaf-Disease-Detection-using-Deep-Learning-"
@@ -41,7 +41,7 @@ export const FALLBACK_PROJECTS = [
     id: "amazon-analytics",
     title: "Amazon Product Analytics",
     description: "Data analytics project focusing on Amazon product datasets, visualized and analyzed using PowerBI and Python.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
     technologies: ["Python", "PowerBI", "Data Analytics"],
     githubUrl: "https://github.com/rohitbirdawade007/amazon-product-analytics-powerbi"
   },
@@ -49,9 +49,10 @@ export const FALLBACK_PROJECTS = [
     id: "air-quality",
     title: "Air Quality Monitoring",
     description: "Simple air quality and weather monitoring website utilizing WeatherAPI for real-time environmental data.",
-    image: "https://images.unsplash.com/photo-1530533718750-25218d6e35de?auto=format&fit=crop&q=80&w=800",
+    image: "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=800",
     technologies: ["HTML", "CSS", "JavaScript", "WeatherAPI"],
-    githubUrl: "https://github.com/rohitbirdawade007/Air_qulity_minitoring"
+    githubUrl: "https://github.com/rohitbirdawade007/Air_qulity_minitoring",
+    demoUrl: "https://rohitbirdawade007.github.io/Air_qulity_minitoring/Air_quality_monitoring/index.html"
   }
 ];
 
