@@ -74,10 +74,11 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontFamily: {
-				poppins: ['Plus Jakarta Sans', 'sans-serif'],
-				sans: ['Plus Jakarta Sans', 'sans-serif'],
-				serif: ['Syne', 'sans-serif'],
-				display: ['Syne', 'sans-serif'],
+				poppins: ['Outfit', 'sans-serif'],
+				sans: ['Outfit', 'sans-serif'],
+				serif: ['Space Grotesk', 'sans-serif'],
+				display: ['Space Grotesk', 'sans-serif'],
+				mono: ['JetBrains Mono', 'monospace'],
 			},
 		}
 	},
