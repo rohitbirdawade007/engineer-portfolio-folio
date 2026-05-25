@@ -41,7 +41,7 @@ const ContactSection = () => {
         {/* Left: editorial connect */}
         <div className="md:col-span-6">
           <span className="eyebrow mb-8 block">Section 06 — Contact</span>
-          <h2 className="font-serif text-6xl md:text-8xl leading-[0.95] tracking-tight mb-10">
+          <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl leading-[0.95] tracking-tight mb-10 font-bold">
             Let's <span className="text-gradient">Connect.</span>
           </h2>
           <p className="text-foreground/70 mb-12 max-w-sm text-lg font-light leading-relaxed">
@@ -50,7 +50,7 @@ const ContactSection = () => {
           <div className="space-y-1">
             <a
               href={`mailto:${profile.email}`}
-              className="block font-serif italic text-2xl md:text-3xl border-b border-foreground/10 pb-4 hover:border-secondary hover:text-secondary transition-colors"
+              className="block font-serif italic text-xl sm:text-2xl md:text-3xl border-b border-foreground/10 pb-4 hover:border-secondary hover:text-secondary transition-colors break-all"
             >
               {profile.email}
             </a>
@@ -70,7 +70,7 @@ const ContactSection = () => {
 
         {/* Right: form */}
         <div className="md:col-span-6">
-          <div className="border border-foreground/10 p-8 md:p-12 bg-card/50">
+          <div className="border border-foreground/10 p-6 sm:p-8 md:p-12 bg-card/50 rounded-2xl">
             <form onSubmit={handleSubmit} className="space-y-12 pt-4">
               <div className="relative">
                 <label htmlFor="name" className="text-[9px] uppercase tracking-[0.3em] text-secondary font-bold absolute -top-4">Full Name</label>
