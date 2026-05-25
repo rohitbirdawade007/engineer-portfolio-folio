@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { useQuery } from "@tanstack/react-query";
-import { getProfile, getAssetUrl } from "@/services/api";
+import RBLogo from "@/components/RBLogo";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,8 +10,7 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState("home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const { data: profile } = useQuery({ queryKey: ['profile'], queryFn: getProfile });
-  const logoUrl = profile?.logo ? getAssetUrl(profile.logo) : null;
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,21 +63,8 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         {/* Logo */}
-        <button
-          onClick={() => scrollToSection("home")}
-          className="flex items-center gap-3 group"
-        >
-          {logoUrl ? (
-            <img src={logoUrl} alt="Logo" className="h-9 w-9 rounded-full object-cover ring-2 ring-purple-500/30 group-hover:ring-purple-500/60 transition-all" />
-          ) : (
-            <div className="w-9 h-9 rounded-full flex items-center justify-center text-white font-bold text-sm"
-              style={{ background: "linear-gradient(135deg, hsl(262 83% 68%), hsl(168 84% 50%))" }}>
-              R
-            </div>
-          )}
-          <span className="font-display text-xl font-bold text-white group-hover:text-gradient transition-all">
-            Rohit<span className="text-gradient">.</span>
-          </span>
+        <button onClick={() => scrollToSection("home")}>
+          <RBLogo size={44} animated variant="full" />
         </button>
 
         {/* Desktop Nav */}
