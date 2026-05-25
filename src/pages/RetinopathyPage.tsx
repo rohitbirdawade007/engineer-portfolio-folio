@@ -43,7 +43,7 @@ const RetinopathyPage = () => {
       ];
       // Weight towards Diabetic Retinopathy to match project description
       const weights = [0.4, 0.2, 0.2, 0.2];
-      let random = Math.random();
+      const random = Math.random();
       let condition = "";
       let sum = 0;
       for (let i = 0; i < weights.length; i++) {
