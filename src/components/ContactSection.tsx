@@ -50,7 +50,7 @@ const ContactSection = () => {
           <div className="space-y-1">
             <a
               href={`mailto:${profile.email}`}
-              className="block font-serif italic text-2xl md:text-3xl border-b border-foreground/10 pb-4 hover:border-secondary hover:text-secondary transition-colors"
+              className="block font-serif italic text-xl sm:text-2xl md:text-3xl border-b border-foreground/10 pb-4 hover:border-secondary hover:text-secondary transition-colors break-all"
             >
               {profile.email}
             </a>
