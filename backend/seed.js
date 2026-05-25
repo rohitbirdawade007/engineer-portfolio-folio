@@ -143,16 +143,7 @@ const projectsData = [
     image: "/lovable-uploads/336b76fb-a773-44ae-9862-2668262245b7.png",
     slug: 'sustainable-agriculture-ai-iot'
   },
-  {
-    title: "Guardian Eye - Missing Person Detection",
-    problemStatement: "Traditional search methods are slow and localized.",
-    description: "Centralized facial recognition dashboard for real-time tracking across distributed visual node clusters.",
-    tags: ["React", "Face Recognition", "MongoDB", "Python"],
-    category: "Computer Vision",
-    featured: true,
-    image: "/lovable-uploads/0add4ee8-c5f3-4d3b-ad72-1a48807ce2ee.png",
-    slug: 'guardian-eye-missing-person'
-  },
+
   {
     title: "AI-Based Personalized Diet System",
     problemStatement: "Providing personalized nutrition advice based on health data is a complex task for traditional software.",
