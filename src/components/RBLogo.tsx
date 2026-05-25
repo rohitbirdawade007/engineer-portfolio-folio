@@ -1,173 +1,265 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface RBLogoProps {
-  size?: number;        // px
+  size?: number;
   animated?: boolean;
-  variant?: "full" | "icon"; // full = RB + text, icon = just the emblem
+  variant?: "full" | "icon";
 }
 
 const RBLogo = ({ size = 44, animated = true, variant = "icon" }: RBLogoProps) => {
-  const svgRef = useRef<SVGSVGElement>(null);
+  const [drawn, setDrawn] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setDrawn(true), 100);
+    return () => clearTimeout(t);
+  }, []);
+
+  const s = size;
+  const cx = s / 2;
+  const cy = s / 2;
+  const r = s * 0.46;
+
+  // Particles orbiting at various angles and radii
+  const particles = [
+    { angle: 0,   orbit: 0.44, radius: 0.028, color: "#8b5cf6", delay: 0,   dur: 6 },
+    { angle: 90,  orbit: 0.44, radius: 0.020, color: "#10f0a0", delay: 0,   dur: 6 },
+    { angle: 180, orbit: 0.44, radius: 0.028, color: "#f472b6", delay: 0,   dur: 6 },
+    { angle: 270, orbit: 0.44, radius: 0.020, color: "#8b5cf6", delay: 0,   dur: 6 },
+    { angle: 45,  orbit: 0.35, radius: 0.016, color: "#10f0a0", delay: 0,   dur: 4 },
+    { angle: 225, orbit: 0.35, radius: 0.016, color: "#f472b6", delay: 0,   dur: 4 },
+  ];
+
+  const circumference = 2 * Math.PI * r;
 
   return (
-    <div className="rb-logo-wrapper" style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
-      {/* ── The SVG Emblem ── */}
+    <div style={{ display: "inline-flex", alignItems: "center", gap: s * 0.22 }}>
+      {/* ── SVG Emblem ── */}
       <svg
-        ref={svgRef}
-        width={size}
-        height={size}
-        viewBox="0 0 100 100"
+        width={s}
+        height={s}
+        viewBox={`0 0 ${s} ${s}`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ flexShrink: 0 }}
+        style={{
+          flexShrink: 0,
+          transition: "transform 0.4s cubic-bezier(0.34,1.56,0.64,1), filter 0.4s ease",
+          cursor: "pointer",
+        }}
+        className="rb-svg"
       >
         <defs>
-          {/* Primary violet→teal gradient */}
-          <linearGradient id="rbGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#8b5cf6" />
-            <stop offset="100%" stopColor="#10f0a0" />
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#8b5cf6">
+              {animated && <animate attributeName="stop-color" values="#8b5cf6;#10f0a0;#f472b6;#8b5cf6" dur="5s" repeatCount="indefinite"/>}
+            </stop>
+            <stop offset="100%" stopColor="#10f0a0">
+              {animated && <animate attributeName="stop-color" values="#10f0a0;#f472b6;#8b5cf6;#10f0a0" dur="5s" repeatCount="indefinite"/>}
+            </stop>
           </linearGradient>
 
-          {/* Warm gradient for secondary elements */}
-          <linearGradient id="rbGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f472b6" />
-            <stop offset="100%" stopColor="#8b5cf6" />
+          <linearGradient id="g2" x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#f472b6"/>
+            <stop offset="100%" stopColor="#8b5cf6"/>
           </linearGradient>
 
-          {/* Glow filter */}
-          <filter id="rbGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
+          {/* Bloom glow */}
+          <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation={s * 0.04} result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
 
-          {/* Subtle drop shadow */}
-          <filter id="rbShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="0" stdDeviation="4" floodColor="#8b5cf6" floodOpacity="0.5" />
+          <filter id="softglow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation={s * 0.08} result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
 
-          {/* Clip for background shape */}
-          <clipPath id="rbClip">
-            <rect x="2" y="2" width="96" height="96" rx="22" />
-          </clipPath>
+          {/* Mask for clean letter interior */}
+          <mask id="circMask">
+            <circle cx={cx} cy={cy} r={r * 0.88} fill="white"/>
+          </mask>
         </defs>
 
-        {/* ── Background rounded square ── */}
-        <rect x="2" y="2" width="96" height="96" rx="22"
-          fill="url(#rbGrad1)" opacity="0.12" />
-        <rect x="2" y="2" width="96" height="96" rx="22"
-          fill="none" stroke="url(#rbGrad1)" strokeWidth="1.5" opacity="0.5">
-          {animated && (
-            <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite" />
-          )}
-        </rect>
+        {/* ── Background dark circle ── */}
+        <circle cx={cx} cy={cy} r={r * 0.92}
+          fill={`hsl(220 20% 8%)`}
+          stroke="url(#g1)" strokeWidth={s * 0.012} strokeOpacity="0.4"/>
 
-        {/* ── Rotating outer ring ── */}
-        {animated && (
-          <circle cx="50" cy="50" r="46" fill="none"
-            stroke="url(#rbGrad2)" strokeWidth="1" strokeDasharray="8 20" opacity="0.4">
+        {/* ── Subtle inner glow fill ── */}
+        <circle cx={cx} cy={cy} r={r * 0.88} fill="url(#g1)" opacity="0.06"/>
+
+        {/* ── Main spinning ring ── */}
+        {animated ? (
+          <circle cx={cx} cy={cy} r={r}
+            stroke="url(#g1)" strokeWidth={s * 0.015}
+            strokeDasharray={`${circumference * 0.35} ${circumference * 0.65}`}
+            strokeLinecap="round"
+            opacity="0.8">
             <animateTransform attributeName="transform" type="rotate"
-              from="0 50 50" to="360 50 50" dur="10s" repeatCount="indefinite" />
+              from={`0 ${cx} ${cy}`} to={`360 ${cx} ${cy}`} dur="4s" repeatCount="indefinite"/>
+          </circle>
+        ) : (
+          <circle cx={cx} cy={cy} r={r}
+            stroke="url(#g1)" strokeWidth={s * 0.015}
+            strokeDasharray={`${circumference * 0.35} ${circumference * 0.65}`}
+            strokeLinecap="round" opacity="0.8"/>
+        )}
+
+        {/* ── Counter-spin dashed ring ── */}
+        {animated && (
+          <circle cx={cx} cy={cy} r={r * 0.82}
+            stroke="url(#g2)" strokeWidth={s * 0.008}
+            strokeDasharray={`${s * 0.04} ${s * 0.12}`}
+            opacity="0.3">
+            <animateTransform attributeName="transform" type="rotate"
+              from={`360 ${cx} ${cy}`} to={`0 ${cx} ${cy}`} dur="9s" repeatCount="indefinite"/>
           </circle>
         )}
 
-        {/* ── Corner accent dots ── */}
-        <circle cx="16" cy="16" r="2.5" fill="url(#rbGrad2)" opacity="0.7">
-          {animated && <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />}
-        </circle>
-        <circle cx="84" cy="84" r="2.5" fill="url(#rbGrad1)" opacity="0.7">
-          {animated && <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2s" begin="1s" repeatCount="indefinite" />}
-        </circle>
+        {/* ── Orbiting particles ── */}
+        {animated && particles.map((p, i) => {
+          const orbitR = s * p.orbit;
+          const pr = s * p.radius;
+          return (
+            <circle key={i} cx={cx + orbitR} cy={cy} r={pr} fill={p.color} filter="url(#bloom)">
+              <animateTransform attributeName="transform" type="rotate"
+                from={`${p.angle} ${cx} ${cy}`} to={`${p.angle + 360} ${cx} ${cy}`}
+                dur={`${p.dur}s`} repeatCount="indefinite"/>
+            </circle>
+          );
+        })}
 
-        {/* ── The "R" letterform ── */}
-        <g filter="url(#rbGlow)">
-          {/* R - vertical stem */}
-          <rect x="20" y="24" width="6" height="52" rx="3" fill="url(#rbGrad1)" />
-          {/* R - top bowl arch */}
-          <path d="M26 24 Q50 24 50 37 Q50 50 26 50" fill="none"
-            stroke="url(#rbGrad1)" strokeWidth="6" strokeLinecap="round" />
-          {/* R - leg diagonal */}
-          <line x1="26" y1="50" x2="50" y2="76"
-            stroke="url(#rbGrad1)" strokeWidth="6" strokeLinecap="round" />
+        {/* ── "R" — clean geometric letterform ── */}
+        <g filter="url(#bloom)" mask="url(#circMask)">
+          {/* R vertical stem */}
+          <rect
+            x={cx * 0.38} y={cy * 0.44}
+            width={s * 0.068} height={s * 0.52}
+            rx={s * 0.02}
+            fill="url(#g1)"
+            style={{
+              transition: drawn ? "opacity 0.8s ease" : undefined,
+              opacity: drawn ? 1 : 0,
+            }}
+          />
+          {/* R top bowl - right half arc */}
+          <path
+            d={`
+              M ${cx * 0.38 + s * 0.068} ${cy * 0.44}
+              Q ${cx * 0.82} ${cy * 0.44}
+                ${cx * 0.82} ${cy * 0.67}
+              Q ${cx * 0.82} ${cy * 0.88}
+                ${cx * 0.38 + s * 0.068} ${cy * 0.88}
+            `}
+            stroke="url(#g1)" strokeWidth={s * 0.068} fill="none"
+            strokeLinecap="round"
+            style={{ opacity: drawn ? 1 : 0, transition: drawn ? "opacity 0.8s 0.1s ease" : undefined }}
+          />
+          {/* R leg diagonal */}
+          <line
+            x1={cx * 0.38 + s * 0.068} y1={cy * 0.88}
+            x2={cx * 0.82} y2={cy * 1.56}
+            stroke="url(#g1)" strokeWidth={s * 0.068}
+            strokeLinecap="round"
+            style={{ opacity: drawn ? 1 : 0, transition: drawn ? "opacity 0.8s 0.2s ease" : undefined }}
+          />
         </g>
 
-        {/* ── The "B" letterform ── */}
-        <g filter="url(#rbGlow)">
-          {/* B - vertical stem */}
-          <rect x="52" y="24" width="6" height="52" rx="3" fill="url(#rbGrad2)" />
-          {/* B - top bowl */}
-          <path d="M58 24 Q78 24 78 36 Q78 48 58 48" fill="none"
-            stroke="url(#rbGrad2)" strokeWidth="5.5" strokeLinecap="round" />
-          {/* B - bottom bowl (larger) */}
-          <path d="M58 48 Q80 48 80 62 Q80 76 58 76" fill="none"
-            stroke="url(#rbGrad2)" strokeWidth="5.5" strokeLinecap="round" />
+        {/* ── "B" — clean geometric letterform ── */}
+        <g filter="url(#bloom)" mask="url(#circMask)">
+          {/* B vertical stem */}
+          <rect
+            x={cx * 1.06} y={cy * 0.44}
+            width={s * 0.068} height={s * 0.52}
+            rx={s * 0.02}
+            fill="url(#g2)"
+            style={{ opacity: drawn ? 1 : 0, transition: drawn ? "opacity 0.8s 0.3s ease" : undefined }}
+          />
+          {/* B top bowl */}
+          <path
+            d={`
+              M ${cx * 1.06 + s * 0.068} ${cy * 0.44}
+              Q ${cx * 1.54} ${cy * 0.44}
+                ${cx * 1.54} ${cy * 0.66}
+              Q ${cx * 1.54} ${cy * 0.88}
+                ${cx * 1.06 + s * 0.068} ${cy * 0.88}
+            `}
+            stroke="url(#g2)" strokeWidth={s * 0.06} fill="none"
+            strokeLinecap="round"
+            style={{ opacity: drawn ? 1 : 0, transition: drawn ? "opacity 0.8s 0.4s ease" : undefined }}
+          />
+          {/* B bottom bowl — bigger */}
+          <path
+            d={`
+              M ${cx * 1.06 + s * 0.068} ${cy * 0.88}
+              Q ${cx * 1.62} ${cy * 0.88}
+                ${cx * 1.62} ${cy * 1.12}
+              Q ${cx * 1.62} ${cy * 1.36}
+                ${cx * 1.06 + s * 0.068} ${cy * 1.36}
+            `}
+            stroke="url(#g2)" strokeWidth={s * 0.06} fill="none"
+            strokeLinecap="round"
+            style={{ opacity: drawn ? 1 : 0, transition: drawn ? "opacity 0.8s 0.5s ease" : undefined }}
+          />
         </g>
 
-        {/* ── Center dot accent ── */}
-        <circle cx="50" cy="50" r="3" fill="white" opacity="0.9">
+        {/* ── Center connector dot ── */}
+        <circle cx={cx} cy={cy} r={s * 0.028}
+          fill="white" opacity="0.9" filter="url(#bloom)">
           {animated && (
             <>
-              <animate attributeName="r" values="3;5;3" dur="2.5s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.5s" repeatCount="indefinite" />
+              <animate attributeName="r" values={`${s*0.028};${s*0.044};${s*0.028}`} dur="2.4s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.9;0.3;0.9" dur="2.4s" repeatCount="indefinite"/>
             </>
           )}
         </circle>
 
-        {/* ── Scan line animation ── */}
-        {animated && (
-          <rect x="2" y="2" width="96" height="2" rx="1" fill="url(#rbGrad1)" opacity="0.5" clipPath="url(#rbClip)">
-            <animateTransform attributeName="transform" type="translate"
-              from="0 0" to="0 96" dur="3s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0;0.6;0" dur="3s" repeatCount="indefinite" />
-          </rect>
-        )}
+        {/* ── Tick marks at 12/3/6/9 o'clock ── */}
+        {[0, 90, 180, 270].map((deg, i) => {
+          const rad = (deg * Math.PI) / 180;
+          const x1 = cx + Math.cos(rad) * r * 1.02;
+          const y1 = cy + Math.sin(rad) * r * 1.02;
+          const x2 = cx + Math.cos(rad) * r * 1.14;
+          const y2 = cy + Math.sin(rad) * r * 1.14;
+          return (
+            <line key={i} x1={x1} y1={y1} x2={x2} y2={y2}
+              stroke="url(#g1)" strokeWidth={s * 0.012} strokeLinecap="round" opacity="0.5"/>
+          );
+        })}
       </svg>
 
-      {/* ── Text part (only in "full" variant) ── */}
+      {/* ── Text (full variant only) ── */}
       {variant === "full" && (
-        <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-          <span style={{
+        <div style={{ lineHeight: 1.1 }}>
+          <div style={{
             fontFamily: "'Space Grotesk', sans-serif",
             fontWeight: 700,
-            fontSize: size * 0.45,
-            background: "linear-gradient(135deg, #8b5cf6, #10f0a0)",
+            fontSize: s * 0.42,
+            letterSpacing: "-0.04em",
+            background: "linear-gradient(135deg, #fff 40%, rgba(255,255,255,0.55))",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
-            letterSpacing: "-0.03em",
           }}>
             Rohit
-          </span>
-          <span style={{
+          </div>
+          <div style={{
             fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 400,
-            fontSize: size * 0.22,
-            color: "rgba(255,255,255,0.4)",
-            letterSpacing: "0.15em",
+            fontSize: s * 0.19,
+            letterSpacing: "0.18em",
+            color: "rgba(255,255,255,0.35)",
             textTransform: "uppercase",
+            marginTop: s * 0.03,
           }}>
             Birdawade
-          </span>
+          </div>
         </div>
       )}
 
       <style>{`
-        .rb-logo-wrapper {
-          cursor: pointer;
-        }
-        .rb-logo-wrapper:hover svg rect:first-child {
-          opacity: 0.22;
-          transition: opacity 0.3s;
-        }
-        .rb-logo-wrapper svg {
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                      filter 0.3s ease;
-        }
-        .rb-logo-wrapper:hover svg {
-          transform: scale(1.06);
-          filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.6));
+        .rb-svg:hover {
+          transform: scale(1.1) rotate(-3deg);
+          filter: drop-shadow(0 0 ${s * 0.18}px rgba(139,92,246,0.7));
         }
       `}</style>
     </div>
