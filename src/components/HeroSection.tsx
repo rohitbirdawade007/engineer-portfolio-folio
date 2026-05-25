@@ -27,13 +27,13 @@ const HeroSection = () => {
         <div className="grid md:grid-cols-12 gap-12 items-end">
           {/* Hero content */}
           <div className="md:col-span-8 animate-fadeUp">
-            <span className="eyebrow italic mb-8 block">
+            <span className="eyebrow mb-8 block">
               Artificial Intelligence &amp; Machine Learning
             </span>
-            <h1 className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tight mb-10">
+            <h1 className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight mb-10 font-bold">
               {first} {middle && <span>{middle}</span>}
               <br />
-              <span className="italic text-muted-foreground">{last}.</span>
+              <span className="text-gradient">{last}.</span>
             </h1>
             <p className="max-w-xl text-lg md:text-xl text-foreground/75 leading-relaxed font-light mb-12">
               {profile?.heroDescription || "Engineering intelligent solutions through data. I bridge the gap between"}{" "}

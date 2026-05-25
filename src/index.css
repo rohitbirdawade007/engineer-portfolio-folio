@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,58 +6,63 @@
 
 @layer base {
   :root {
-    /* Ocean Deep editorial palette — all HSL */
-    --background: 38 30% 95%;            /* #f7f4ee paper */
-    --foreground: 215 71% 15%;           /* #0c2340 deep navy */
+    /* Sunset Blaze vibrant creative palette */
+    --background: 24 100% 98%;           /* warm off-white */
+    --foreground: 264 60% 11%;           /* deep plum */
 
     --card: 0 0% 100%;
-    --card-foreground: 215 71% 15%;
+    --card-foreground: 264 60% 11%;
 
-    --popover: 38 30% 97%;
-    --popover-foreground: 215 71% 15%;
+    --popover: 24 100% 99%;
+    --popover-foreground: 264 60% 11%;
 
-    --primary: 215 71% 15%;              /* #0c2340 */
-    --primary-foreground: 38 30% 95%;
+    --primary: 16 100% 60%;              /* #ff6b35 orange */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 192 56% 39%;            /* #2d8a9e teal */
-    --secondary-foreground: 38 30% 95%;
+    --secondary: 330 78% 59%;            /* #e84393 magenta */
+    --secondary-foreground: 0 0% 100%;
 
-    --accent: 174 41% 55%;               /* #5cbdb9 mint */
-    --accent-foreground: 215 71% 15%;
+    --accent: 248 74% 63%;               /* #6c5ce7 violet */
+    --accent-foreground: 0 0% 100%;
 
-    --muted: 38 22% 90%;
-    --muted-foreground: 209 60% 27%;     /* #1a4a6e */
+    --muted: 24 40% 94%;
+    --muted-foreground: 264 25% 35%;
 
-    --destructive: 0 70% 45%;
-    --destructive-foreground: 38 30% 95%;
+    --destructive: 0 84% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 215 71% 15% / 0.12;
-    --input: 215 71% 15% / 0.20;
-    --ring: 192 56% 39%;
+    --border: 264 60% 11% / 0.10;
+    --input: 264 60% 11% / 0.18;
+    --ring: 16 100% 60%;
 
-    --radius: 0.25rem;
+    --radius: 1rem;
+
+    --gradient-sunset: linear-gradient(135deg, hsl(16 100% 60%), hsl(33 93% 54%), hsl(330 78% 59%));
+    --gradient-violet: linear-gradient(135deg, hsl(330 78% 59%), hsl(248 74% 63%));
+    --shadow-glow: 0 20px 60px -20px hsl(16 100% 60% / 0.45);
+    --shadow-soft: 0 12px 40px -16px hsl(264 60% 11% / 0.18);
   }
 
   .dark {
-    --background: 215 71% 8%;
-    --foreground: 38 30% 95%;
-    --card: 215 71% 10%;
-    --card-foreground: 38 30% 95%;
-    --popover: 215 71% 10%;
-    --popover-foreground: 38 30% 95%;
-    --primary: 174 41% 55%;
-    --primary-foreground: 215 71% 15%;
-    --secondary: 192 56% 39%;
-    --secondary-foreground: 38 30% 95%;
-    --accent: 174 41% 55%;
-    --accent-foreground: 215 71% 15%;
-    --muted: 215 50% 18%;
-    --muted-foreground: 38 22% 80%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 38 30% 95%;
-    --border: 38 30% 95% / 0.12;
-    --input: 38 30% 95% / 0.2;
-    --ring: 174 41% 55%;
+    --background: 264 60% 7%;
+    --foreground: 24 100% 96%;
+    --card: 264 50% 11%;
+    --card-foreground: 24 100% 96%;
+    --popover: 264 50% 11%;
+    --popover-foreground: 24 100% 96%;
+    --primary: 16 100% 62%;
+    --primary-foreground: 264 60% 7%;
+    --secondary: 330 78% 62%;
+    --secondary-foreground: 264 60% 7%;
+    --accent: 248 74% 68%;
+    --accent-foreground: 264 60% 7%;
+    --muted: 264 40% 16%;
+    --muted-foreground: 24 30% 75%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 24 100% 96%;
+    --border: 24 100% 96% / 0.10;
+    --input: 24 100% 96% / 0.18;
+    --ring: 16 100% 62%;
   }
 }
 
@@ -68,10 +73,15 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     scroll-behavior: smooth;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 10% 0%, hsl(16 100% 60% / 0.12), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 20%, hsl(330 78% 59% / 0.10), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, hsl(248 74% 63% / 0.10), transparent 60%);
+    background-attachment: fixed;
   }
 
   ::selection {
@@ -82,26 +92,33 @@
 
 @layer components {
   .font-serif-display {
-    font-family: 'Instrument Serif', serif;
-    font-weight: 400;
-    letter-spacing: -0.02em;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
   }
 
   .eyebrow {
-    @apply inline-block text-[11px] uppercase tracking-[0.3em] font-semibold text-secondary;
+    @apply inline-block text-[11px] uppercase tracking-[0.3em] font-bold;
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .editorial-rule {
-    @apply h-px w-full bg-foreground/10;
+    @apply h-px w-full;
+    background: var(--gradient-sunset);
+    opacity: 0.4;
   }
 
   .nav-link {
-    @apply relative text-foreground/80 hover:text-secondary transition-colors duration-300 text-[11px] uppercase tracking-[0.25em] font-semibold;
+    @apply relative text-foreground/80 hover:text-primary transition-colors duration-300 text-sm font-semibold;
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute left-0 -bottom-1 w-0 h-px bg-secondary transition-all duration-300;
+    @apply absolute left-0 -bottom-1 w-0 h-[2px] transition-all duration-300;
+    background: var(--gradient-sunset);
   }
 
   .nav-link:hover::after,
@@ -110,16 +127,18 @@
   }
 
   .btn-editorial {
-    @apply inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground text-[10px] uppercase tracking-[0.25em] font-bold hover:bg-foreground/80 transition-all duration-300;
+    @apply inline-flex items-center justify-center px-8 py-4 text-primary-foreground text-sm font-bold rounded-full transition-all duration-300 hover:-translate-y-0.5;
+    background: var(--gradient-sunset);
+    box-shadow: var(--shadow-glow);
   }
 
   .btn-editorial-outline {
-    @apply inline-flex items-center justify-center px-8 py-4 border border-primary text-primary text-[10px] uppercase tracking-[0.25em] font-bold hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+    @apply inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary text-sm font-bold rounded-full hover:bg-primary hover:text-primary-foreground transition-all duration-300;
   }
 
   .section-heading {
-    font-family: 'Instrument Serif', serif;
-    @apply text-5xl md:text-7xl tracking-tight leading-none;
+    font-family: 'Syne', sans-serif;
+    @apply text-5xl md:text-7xl tracking-tight leading-[0.95] font-bold;
   }
 
   .section-heading::after {
@@ -127,22 +146,25 @@
   }
 
   .card-hover {
-    @apply transition-all duration-500 hover:-translate-y-1;
+    @apply transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl rounded-2xl;
   }
 
   .skill-pill {
-    @apply bg-muted text-foreground/80 px-3 py-1 text-[10px] uppercase tracking-widest font-semibold inline-block m-1 transition-all duration-300 hover:bg-primary hover:text-primary-foreground;
+    @apply bg-card text-foreground px-4 py-2 text-xs font-semibold inline-block m-1 rounded-full border border-border transition-all duration-300 hover:border-primary hover:text-primary hover:-translate-y-0.5;
   }
 
   .text-gradient {
-    font-family: 'Instrument Serif', serif;
-    @apply italic text-secondary;
+    background: var(--gradient-sunset);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    @apply font-bold;
   }
 }
 
 /* Font helper kept for legacy usage */
 .font-poppins {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* Animations */
@@ -170,16 +192,19 @@
 }
 
 .progress-bar {
-  @apply h-px w-full bg-foreground/10 overflow-hidden;
+  @apply h-2 w-full bg-muted overflow-hidden rounded-full;
 }
 
 .progress-bar-fill {
-  @apply h-full bg-secondary;
+  @apply h-full rounded-full;
+  background: var(--gradient-sunset);
   transition: width 1s ease-out;
 }
 
 .back-to-top {
-  @apply fixed bottom-6 right-6 bg-primary text-primary-foreground p-3 shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-50;
+  @apply fixed bottom-6 right-6 text-primary-foreground p-3 rounded-full opacity-0 pointer-events-none transition-all duration-300 z-50;
+  background: var(--gradient-sunset);
+  box-shadow: var(--shadow-glow);
 }
 
 .back-to-top.visible {
