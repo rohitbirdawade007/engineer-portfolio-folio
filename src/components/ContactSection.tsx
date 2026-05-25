@@ -70,7 +70,7 @@ const ContactSection = () => {
 
         {/* Right: form */}
         <div className="md:col-span-6">
-          <div className="border border-foreground/10 p-8 md:p-12 bg-card/50">
+          <div className="border border-foreground/10 p-6 sm:p-8 md:p-12 bg-card/50 rounded-2xl">
             <form onSubmit={handleSubmit} className="space-y-12 pt-4">
               <div className="relative">
                 <label htmlFor="name" className="text-[9px] uppercase tracking-[0.3em] text-secondary font-bold absolute -top-4">Full Name</label>
