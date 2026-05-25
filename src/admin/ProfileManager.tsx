@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { updateProfile, uploadProfileImage, API_URL } from '@/services/api';
+import { updateProfile, uploadProfileImage, API_URL, getAssetUrl, BASE_URL } from '@/services/api';
 import { Save, Upload, User, Globe, Shield, Github, Linkedin, Twitter, Fingerprint, Plus, Trash2, Languages, Briefcase, Award, Building2, HeartHandshake, CheckCircle, MessageSquareQuote } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 
@@ -95,7 +95,8 @@ const ProfileManager = () => {
       toast.loading(`Synchronizing ${field} buffer...`, { id: 'upload' });
       try {
         const { url } = await uploadProfileImage(file);
-        const finalUrl = import.meta.env.PROD ? url : `https://rohit-portfolio-qgd8.onrender.com${url}`;
+        // url is like /uploads/filename.jpg — store the full backend URL
+        const finalUrl = url.startsWith('http') ? url : `${BASE_URL}${url}`;
         setFormData({ ...formData, [field]: finalUrl });
         toast.success(`${field} buffer updated`, { id: 'upload' });
       } catch (err) {
@@ -140,7 +141,7 @@ const ProfileManager = () => {
             <CardContent className="p-10 flex flex-col items-center">
               <div className="relative group mt-8">
                 <div className="w-56 h-56 rounded-[3rem] border-8 border-border overflow-hidden mb-8 bg-slate-50 flex items-center justify-center shadow-inner">
-                  {formData.profileImage ? <img src={formData.profileImage} alt="Profile" className="w-full h-full object-cover" /> : <User size={64} className="text-slate-200" />}
+                  {formData.profileImage ? <img src={getAssetUrl(formData.profileImage)} alt="Profile" className="w-full h-full object-cover" /> : <User size={64} className="text-slate-200" />}
                 </div>
               </div>
               <Label className="cursor-pointer h-14 w-full bg-backgroundoreground hover:bg-black text-white rounded-2xl flex items-center justify-center gap-3 font-black uppercase text-[10px]">

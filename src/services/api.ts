@@ -3,29 +3,29 @@ export const API_URL = (rawApiUrl.startsWith('http') && !rawApiUrl.includes('/ap
   ? (rawApiUrl.endsWith('/') ? `${rawApiUrl}api` : `${rawApiUrl}/api`) 
   : rawApiUrl;
 
-// If API_URL is a full URL (like http://localhost:5000/api), BASE_URL should be http://localhost:5000
-// If API_URL is relative (like /api), BASE_URL should be empty
-export const BASE_URL = API_URL.includes('://') 
-  ? API_URL.split('/api')[0] 
-  : "";
+// The backend server origin — used for resolving /uploads/ image paths.
+// In production VITE_API_URL = "https://my-new-port-yg49.onrender.com/api"
+// so we can derive it. Fall back to the known Render URL.
+export const BASE_URL = API_URL.includes('://')
+  ? API_URL.split('/api')[0]
+  : (import.meta.env.VITE_BACKEND_URL || 'https://my-new-port-yg49.onrender.com');
 
 /**
  * Resolves an asset path to a full URL.
  * - Full HTTP URLs are returned as-is.
- * - Backend-uploaded paths (contain /uploads/ or similar) get BASE_URL prepended.
- * - Local public-folder paths (short paths like /profile.png) are returned as-is
- *   so the browser serves them from the Vite dev server or the deployed CDN.
+ * - Backend-uploaded paths (/uploads/...) get BASE_URL prepended.
+ * - Local public-folder paths are returned as-is.
  */
 export const getAssetUrl = (path: string) => {
   if (!path) return '';
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
   
-  // Backend-stored files typically live under /uploads/
+  // Backend-stored files live under /uploads/
   if (path.startsWith('/uploads/') || path.includes('/api/')) {
     return `${BASE_URL}${path}`;
   }
   
-  // Local public-folder file (e.g., /profile.png) — serve from origin
+  // Local public-folder file (e.g., /lovable-uploads/...) — serve from origin
   return path;
 };
 
