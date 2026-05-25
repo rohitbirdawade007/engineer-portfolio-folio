@@ -14,6 +14,7 @@ const useProfile = () => {
   const [loading, setLoading] = useState(true);
 
   const refreshProfile = async () => {
+    setLoading(true);
     try {
       const res = await fetch(`${API_URL}/profile`);
       const data = await res.json();
@@ -24,6 +25,10 @@ const useProfile = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    refreshProfile();
+  }, []);
 
   return { profile, refreshProfile, loading };
 };
@@ -47,10 +52,8 @@ const ProfileManager = () => {
         testScores: profile.testScores || [],
         recommendations: profile.recommendations || []
       });
-    } else if (!loading) {
-      refreshProfile();
     }
-  }, [profile, loading]);
+  }, [profile]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
