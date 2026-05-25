@@ -31,7 +31,7 @@ const ProjectsSection = () => {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <span className="eyebrow mb-4 block">Section 02 — Portfolio</span>
-            <h2 className="section-heading">Selected <span className="italic text-muted-foreground">Work</span></h2>
+            <h2 className="section-heading">Selected <span className="text-gradient">Work</span></h2>
           </div>
           <span className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-semibold">Index 01 — 05</span>
         </div>

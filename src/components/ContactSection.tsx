@@ -42,7 +42,7 @@ const ContactSection = () => {
         <div className="md:col-span-6">
           <span className="eyebrow mb-8 block">Section 06 — Contact</span>
           <h2 className="font-serif text-6xl md:text-8xl leading-[0.95] tracking-tight mb-10">
-            Let's <span className="italic text-muted-foreground">Connect.</span>
+            Let's <span className="text-gradient">Connect.</span>
           </h2>
           <p className="text-foreground/70 mb-12 max-w-sm text-lg font-light leading-relaxed">
             Currently open to collaborative opportunities and research roles in the AI landscape.
