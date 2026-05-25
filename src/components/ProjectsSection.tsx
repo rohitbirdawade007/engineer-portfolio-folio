@@ -39,15 +39,8 @@ const ProjectsSection = () => {
         </div>
 
         {/* Project Grid */}
-        {isLoading ? (
-          <div className="grid md:grid-cols-2 gap-6">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="glow-card h-72 animate-pulse" />
-            ))}
-          </div>
-        ) : (
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project: any, idx: number) => {
+        <div className="grid md:grid-cols-2 gap-6">
+          {projects.map((project: any, idx: number) => {
               const tags = project.tags || project.technologies || project.techStack || [];
               const github = project.githubUrl || project.githubLink;
               const demo = project.demoUrl || project.demoLink;
@@ -123,7 +116,6 @@ const ProjectsSection = () => {
               );
             })}
           </div>
-        )}
 
         {/* GitHub CTA */}
         <div className="text-center mt-12 scroll-reveal">

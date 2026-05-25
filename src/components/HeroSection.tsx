@@ -161,20 +161,14 @@ const HeroSection = () => {
                   border: "1px solid hsl(262 83% 68% / 0.3)",
                   boxShadow: "0 0 80px hsl(262 83% 68% / 0.2), inset 0 0 30px hsl(0 0% 0% / 0.3)"
                 }}>
-                {isLoading ? (
-                  <div className="w-full h-full flex items-center justify-center bg-white/5">
-                    <Loader2 className="animate-spin text-purple-400" size={32} />
-                  </div>
-                ) : (
-                  <img
-                    src={getAssetUrl(photoUrl)}
-                    alt={name}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png';
-                    }}
-                  />
-                )}
+                <img
+                  src={getAssetUrl(photoUrl)}
+                  alt={name}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png';
+                  }}
+                />
                 {/* Gradient overlay at bottom */}
                 <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
                   style={{ background: "linear-gradient(to top, hsl(220 20% 6% / 0.8), transparent)" }} />
