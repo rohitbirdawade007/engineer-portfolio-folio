@@ -41,7 +41,7 @@ const ContactSection = () => {
         {/* Left: editorial connect */}
         <div className="md:col-span-6">
           <span className="eyebrow mb-8 block">Section 06 — Contact</span>
-          <h2 className="font-serif text-6xl md:text-8xl leading-[0.95] tracking-tight mb-10">
+          <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl leading-[0.95] tracking-tight mb-10 font-bold">
             Let's <span className="text-gradient">Connect.</span>
           </h2>
           <p className="text-foreground/70 mb-12 max-w-sm text-lg font-light leading-relaxed">
