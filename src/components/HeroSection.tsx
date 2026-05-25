@@ -30,7 +30,7 @@ const HeroSection = () => {
             <span className="eyebrow mb-8 block">
               Artificial Intelligence &amp; Machine Learning
             </span>
-            <h1 className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tight mb-10 font-bold">
+            <h1 className="font-serif text-[3.25rem] sm:text-7xl md:text-8xl lg:text-9xl leading-[0.95] tracking-tight mb-10 font-bold break-words">
               {first} {middle && <span>{middle}</span>}
               <br />
               <span className="text-gradient">{last}.</span>
