@@ -62,16 +62,16 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    background-color: hsl(220 20% 6%);
+    background-color: hsl(150 25% 7%);
     background-image:
-      radial-gradient(ellipse 80% 60% at 50% -10%, hsl(262 83% 68% / 0.15), transparent 60%),
-      radial-gradient(ellipse 50% 40% at 100% 50%, hsl(168 84% 50% / 0.08), transparent 50%),
-      radial-gradient(ellipse 60% 40% at 0% 80%, hsl(330 86% 65% / 0.07), transparent 50%);
+      radial-gradient(ellipse 80% 60% at 50% -10%, hsl(148 55% 45% / 0.15), transparent 60%),
+      radial-gradient(ellipse 50% 40% at 100% 50%, hsl(84 60% 62% / 0.08), transparent 50%),
+      radial-gradient(ellipse 60% 40% at 0% 80%, hsl(38 82% 62% / 0.07), transparent 50%);
     background-attachment: fixed;
   }
 
   ::selection {
-    background-color: hsl(262 83% 68% / 0.4);
+    background-color: hsl(148 55% 45% / 0.4);
     color: #fff;
   }
 
@@ -79,10 +79,10 @@
     width: 5px;
   }
   ::-webkit-scrollbar-track {
-    background: hsl(220 20% 6%);
+    background: hsl(150 25% 7%);
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(262 83% 68% / 0.5);
+    background: hsl(148 55% 45% / 0.5);
     border-radius: 99px;
   }
 }
@@ -135,17 +135,17 @@
 
   /* ── Glass Cards ────────────────────────────────────────────────────── */
   .glass {
-    background: hsl(220 20% 12% / 0.6);
+    background: hsl(150 22% 11% / 0.6);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid hsl(210 40% 96% / 0.08);
+    border: 1px solid hsl(90 30% 94% / 0.08);
   }
 
   .glass-strong {
-    background: hsl(220 20% 14% / 0.85);
+    background: hsl(150 22% 12% / 0.85);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    border: 1px solid hsl(210 40% 96% / 0.12);
+    border: 1px solid hsl(90 30% 94% / 0.12);
   }
 
   .glow-card {
@@ -155,33 +155,33 @@
 
   .glow-card:hover {
     transform: translateY(-4px);
-    border-color: hsl(262 83% 68% / 0.3);
-    box-shadow: 0 20px 60px -20px hsl(262 83% 68% / 0.25), 0 4px 24px -8px hsl(0 0% 0% / 0.4);
+    border-color: hsl(148 55% 45% / 0.3);
+    box-shadow: 0 20px 60px -20px hsl(148 55% 45% / 0.25), 0 4px 24px -8px hsl(0 0% 0% / 0.4);
   }
 
   /* ── Buttons ────────────────────────────────────────────────────────── */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm font-semibold text-white transition-all duration-300;
     background: var(--gradient-hero);
-    box-shadow: 0 0 30px hsl(262 83% 68% / 0.35);
+    box-shadow: 0 0 30px hsl(148 55% 45% / 0.35);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 50px hsl(262 83% 68% / 0.5);
+    box-shadow: 0 0 50px hsl(148 55% 45% / 0.5);
   }
 
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-sm font-semibold transition-all duration-300;
-    border: 1px solid hsl(210 40% 96% / 0.2);
-    color: hsl(210 40% 96% / 0.8);
-    background: hsl(220 20% 12% / 0.4);
+    border: 1px solid hsl(90 30% 94% / 0.2);
+    color: hsl(90 30% 94% / 0.8);
+    background: hsl(150 22% 11% / 0.4);
   }
 
   .btn-outline:hover {
-    border-color: hsl(262 83% 68% / 0.5);
-    color: hsl(262 83% 68%);
-    background: hsl(262 83% 68% / 0.08);
+    border-color: hsl(148 55% 45% / 0.5);
+    color: hsl(148 55% 45%);
+    background: hsl(148 55% 45% / 0.08);
     transform: translateY(-2px);
   }
 
@@ -192,11 +192,11 @@
   /* ── Nav ────────────────────────────────────────────────────────────── */
   .nav-link {
     @apply relative text-sm font-medium transition-colors duration-300;
-    color: hsl(210 40% 96% / 0.6);
+    color: hsl(90 30% 94% / 0.6);
   }
 
   .nav-link:hover, .nav-link.active {
-    color: hsl(210 40% 96%);
+    color: hsl(90 30% 94%);
   }
 
   .nav-link::after {
@@ -219,21 +219,21 @@
   /* ── Tags / Pills ───────────────────────────────────────────────────── */
   .tag {
     @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-    background: hsl(262 83% 68% / 0.12);
-    color: hsl(262 83% 68%);
-    border: 1px solid hsl(262 83% 68% / 0.2);
+    background: hsl(148 55% 45% / 0.12);
+    color: hsl(148 55% 45%);
+    border: 1px solid hsl(148 55% 45% / 0.2);
   }
 
   .tag-teal {
-    background: hsl(168 84% 50% / 0.12);
-    color: hsl(168 84% 50%);
-    border: 1px solid hsl(168 84% 50% / 0.2);
+    background: hsl(84 60% 62% / 0.12);
+    color: hsl(84 60% 62%);
+    border: 1px solid hsl(84 60% 62% / 0.2);
   }
 
   .tag-pink {
-    background: hsl(330 86% 65% / 0.12);
-    color: hsl(330 86% 65%);
-    border: 1px solid hsl(330 86% 65% / 0.2);
+    background: hsl(38 82% 62% / 0.12);
+    color: hsl(38 82% 62%);
+    border: 1px solid hsl(38 82% 62% / 0.2);
   }
 
   .skill-pill {
@@ -241,14 +241,14 @@
   }
 
   .skill-pill:hover {
-    background: hsl(262 83% 68% / 0.2);
+    background: hsl(148 55% 45% / 0.2);
     transform: translateY(-1px);
   }
 
   /* ── Neon Divider ───────────────────────────────────────────────────── */
   .neon-line {
     @apply h-px w-full;
-    background: linear-gradient(90deg, transparent, hsl(262 83% 68% / 0.5), transparent);
+    background: linear-gradient(90deg, transparent, hsl(148 55% 45% / 0.5), transparent);
   }
 
   .editorial-rule { @apply neon-line; }
@@ -256,7 +256,7 @@
   /* ── Progress Bars ──────────────────────────────────────────────────── */
   .progress-bar {
     @apply h-1.5 w-full rounded-full overflow-hidden;
-    background: hsl(220 20% 16%);
+    background: hsl(150 20% 15%);
   }
 
   .progress-bar-fill {
@@ -346,21 +346,21 @@
 .cursor-blink::after {
   content: '|';
   animation: blink 1s step-end infinite;
-  color: hsl(168 84% 50%);
+  color: hsl(84 60% 62%);
   margin-left: 2px;
 }
 
 /* Neon dot */
 .neon-dot {
   @apply inline-block w-2 h-2 rounded-full;
-  background: hsl(168 84% 50%);
-  box-shadow: 0 0 8px hsl(168 84% 50%), 0 0 16px hsl(168 84% 50% / 0.5);
+  background: hsl(84 60% 62%);
+  box-shadow: 0 0 8px hsl(84 60% 62%), 0 0 16px hsl(84 60% 62% / 0.5);
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
 /* Grid dots background */
 .bg-grid {
-  background-image: radial-gradient(hsl(210 40% 96% / 0.06) 1px, transparent 1px);
+  background-image: radial-gradient(hsl(90 30% 94% / 0.06) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
