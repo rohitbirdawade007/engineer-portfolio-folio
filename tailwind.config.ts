@@ -74,10 +74,10 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out'
 			},
 			fontFamily: {
-				poppins: ['Outfit', 'sans-serif'],
-				sans: ['Outfit', 'sans-serif'],
-				serif: ['Space Grotesk', 'sans-serif'],
-				display: ['Space Grotesk', 'sans-serif'],
+				poppins: ['Inter', 'sans-serif'],
+				sans: ['Inter', 'sans-serif'],
+				serif: ['Fraunces', 'sans-serif'],
+				display: ['Fraunces', 'sans-serif'],
 				mono: ['JetBrains Mono', 'monospace'],
 			},
 		}
