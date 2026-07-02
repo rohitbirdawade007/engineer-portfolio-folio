@@ -178,7 +178,7 @@ export const FALLBACK_CERTIFICATIONS = [
 ];
 
 export const FALLBACK_PROFILE = {
-  name: "Rohit Sandip Birdawade",
+  name: "Rohit\u00a0 Birdawade",
   title: "Aspiring AI & ML Engineer",
   tagline: "Computer Science Engineer with a passion for AI and ML",
   bio: "Highly motivated and results-driven Computer Science Engineer with a strong foundation in software development, data analytics, and deep learning models. Proficient in designing and implementing advanced algorithms, with practical experience in hydroponic farming projects integrating aquaponics and poultry systems.\n\nDemonstrated ability to work collaboratively on interdisciplinary projects and deliver innovative solutions. Proven internship experience in Data Analytics, showcasing strong analytical and problem-solving skills. Committed to continuous learning and applying cutting-edge technologies to solve real-world problems.",
