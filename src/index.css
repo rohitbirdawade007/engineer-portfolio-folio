@@ -6,43 +6,43 @@
 
 @layer base {
   :root {
-    --background: 220 20% 6%;
-    --foreground: 210 40% 96%;
+    --background: 150 25% 7%;
+    --foreground: 90 30% 94%;
 
-    --card: 220 20% 9%;
-    --card-foreground: 210 40% 96%;
+    --card: 150 22% 10%;
+    --card-foreground: 90 30% 94%;
 
-    --popover: 220 20% 9%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 150 22% 10%;
+    --popover-foreground: 90 30% 94%;
 
-    --primary: 262 83% 68%;          /* vivid violet #8b5cf6 */
-    --primary-foreground: 0 0% 100%;
+    --primary: 148 55% 45%;          /* evergreen #34a06a */
+    --primary-foreground: 150 25% 7%;
 
-    --secondary: 168 84% 50%;        /* electric teal #10f0a0 */
-    --secondary-foreground: 220 20% 6%;
+    --secondary: 84 60% 62%;         /* fresh moss #a8d661 */
+    --secondary-foreground: 150 25% 7%;
 
-    --accent: 330 86% 65%;           /* neon pink #f472b6 */
-    --accent-foreground: 0 0% 100%;
+    --accent: 38 82% 62%;            /* amber sunlight #ecb64b */
+    --accent-foreground: 150 25% 7%;
 
-    --muted: 220 20% 14%;
-    --muted-foreground: 210 20% 55%;
+    --muted: 150 18% 14%;
+    --muted-foreground: 120 12% 65%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 40% 96% / 0.08;
-    --input: 210 40% 96% / 0.10;
-    --ring: 262 83% 68%;
+    --border: 90 30% 94% / 0.08;
+    --input: 90 30% 94% / 0.10;
+    --ring: 148 55% 45%;
 
     --radius: 0.75rem;
 
-    --glow-primary: 0 0 60px hsl(262 83% 68% / 0.4);
-    --glow-teal: 0 0 60px hsl(168 84% 50% / 0.3);
-    --glow-pink: 0 0 60px hsl(330 86% 65% / 0.3);
+    --glow-primary: 0 0 60px hsl(148 55% 45% / 0.4);
+    --glow-teal: 0 0 60px hsl(84 60% 62% / 0.3);
+    --glow-pink: 0 0 60px hsl(38 82% 62% / 0.3);
 
-    --gradient-hero: linear-gradient(135deg, hsl(262 83% 68%), hsl(168 84% 50%));
-    --gradient-warm: linear-gradient(135deg, hsl(330 86% 65%), hsl(262 83% 68%));
-    --gradient-cool: linear-gradient(135deg, hsl(168 84% 50%), hsl(197 90% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(148 55% 45%), hsl(84 60% 62%));
+    --gradient-warm: linear-gradient(135deg, hsl(38 82% 62%), hsl(148 55% 45%));
+    --gradient-cool: linear-gradient(135deg, hsl(168 60% 45%), hsl(148 55% 45%));
   }
 }
 
