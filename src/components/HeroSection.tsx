@@ -44,7 +44,7 @@ const HeroSection = () => {
   }, [roleIdx]);
 
   const profile = apiProfile || FALLBACK_PROFILE;
-  const photoUrl = profile?.profileImage || profile?.photo || "/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png";
+  const photoUrl = profile?.profileImage || profile?.photo || "/__l5e/assets-v1/fee48989-8b8d-44d2-9bd1-2d2fc64e99ec/profile-photo.png";
   const name = profile?.name || "Rohit Sandip Birdawade";
   const [first, ...rest] = name.split(" ");
   const last = rest.pop() || "";
@@ -166,7 +166,7 @@ const HeroSection = () => {
                   alt={name}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/lovable-uploads/859560b4-157c-4dc1-a07c-9c8ccbdb9c8d.png';
+                    (e.target as HTMLImageElement).src = '/__l5e/assets-v1/fee48989-8b8d-44d2-9bd1-2d2fc64e99ec/profile-photo.png';
                   }}
                 />
                 {/* Gradient overlay at bottom */}
