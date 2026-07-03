@@ -2,7 +2,6 @@ import { Github, Linkedin, Mail, Lock, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getProfile } from "@/services/api";
-import RBLogo from "@/components/RBLogo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -44,8 +43,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           {/* Brand */}
           <div>
-            <RBLogo size={48} animated variant="full" />
-            <p className="text-xs text-white/30 font-mono-custom mt-2">AI & ML Engineer — Pune, India</p>
+            <p className="font-display text-xl font-bold text-white">Rohit Birdawade</p>
+            <p className="text-xs text-white/30 font-mono-custom mt-2">AI &amp; ML Engineer — Pune, India</p>
           </div>
 
           {/* Nav links */}
