@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import RBLogo from "@/components/RBLogo";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -61,11 +60,7 @@ const Navbar = () => {
           : "bg-transparent py-5"
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        {/* Logo */}
-        <button onClick={() => scrollToSection("home")}>
-          <RBLogo size={44} animated variant="full" />
-        </button>
+      <div className="max-w-7xl mx-auto px-6 flex justify-end items-center">
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1">
